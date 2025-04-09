@@ -19,5 +19,7 @@ abstract class ImageVistaDatabase: RoomDatabase() {
 
     abstract fun feedImageDao():EditorialFeedDao
 
+//    this is commite 2
+
 
 }
