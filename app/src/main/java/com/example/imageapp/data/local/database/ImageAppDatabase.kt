@@ -18,6 +18,7 @@ abstract class ImageVistaDatabase: RoomDatabase() {
     abstract fun favoriteImagesDao(): FavoriteImagesDao
 
     abstract fun feedImageDao():EditorialFeedDao
+        // this is laude sit
 
 //    this is commite 2
 
