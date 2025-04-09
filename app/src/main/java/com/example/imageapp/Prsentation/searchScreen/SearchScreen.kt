@@ -47,7 +47,9 @@ import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class) @Composable
-fun SearchScreen(snackbarHostState: SnackbarHostState,
+fun SearchScreen(
+
+    snackbarHostState: SnackbarHostState,
                  navHostController: NavHostController,
                  snackbarEvent: Flow<SnackbarEvent>,
                  scrollBehavior: TopAppBarScrollBehavior,
@@ -56,7 +58,9 @@ fun SearchScreen(snackbarHostState: SnackbarHostState,
                  onBackClick: () -> Unit = { navHostController.navigateUp() },
                  onSearch: (String) -> Unit,
                  onImageClick: (String) -> Unit,
-                 toggleFavoriteStatus :(UnsplashImage)->Unit)
+                 toggleFavoriteStatus :(UnsplashImage)->Unit
+
+)
 {
 
     val focusRequester = remember { FocusRequester() }

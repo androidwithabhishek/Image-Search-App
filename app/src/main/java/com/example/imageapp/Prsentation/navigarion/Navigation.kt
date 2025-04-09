@@ -33,13 +33,14 @@ fun Navigation(modifier: Modifier = Modifier,
                topAppBarScrollBehavior: TopAppBarScrollBehavior)
 {
 
-    val viewModel: MainViewModel = hiltViewModel()
-
-    val images = viewModel.images
 
     NavHost(navController = navController, startDestination = Routes.HomeScreen) {
 
         composable<Routes.HomeScreen> {
+            val viewModel: MainViewModel = hiltViewModel()
+            val favoriteImageIdsHome by viewModel.favoriteImageIds.collectAsStateWithLifecycle()
+            val images = viewModel.images.collectAsLazyPagingItems()
+
 
             HomeScreen(
                     images = images,
@@ -52,9 +53,16 @@ fun Navigation(modifier: Modifier = Modifier,
 
 
                     },
-                    navController = navController,
+
                     onSearchClick = { navController.navigate(Routes.SearchScreen) },
                     onFABClick = { navController.navigate(Routes.FevScreen) },
+
+                    favoriteImageIDs = favoriteImageIdsHome,
+                    toggleFavoriteStatus = {
+
+                        viewModel.toggleFavoriteStatus(it)
+
+                    },
             )
 
 
@@ -93,7 +101,7 @@ fun Navigation(modifier: Modifier = Modifier,
 
 
         composable<Routes.FevScreen> {
-            val favViewMode:FavViewMode = hiltViewModel()
+            val favViewMode: FavViewMode = hiltViewModel()
             val favImages = favViewMode.favoriteImage.collectAsLazyPagingItems()
             val favoriteImageIds by favViewMode.favoriteImageIds.collectAsStateWithLifecycle()
             FevScreen(snackbarHostState = snackbarState,
@@ -112,7 +120,8 @@ fun Navigation(modifier: Modifier = Modifier,
 
                           favViewMode.toggleFavoriteStatus(it)
 
-                      }, onSearchClick = { navController.navigate(Routes.SearchScreen) })
+                      },
+                      onSearchClick = { navController.navigate(Routes.SearchScreen) })
         }
 
         composable<Routes.FullScreen> { backStackEntry ->

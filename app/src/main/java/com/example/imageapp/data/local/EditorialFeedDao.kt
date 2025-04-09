@@ -6,20 +6,30 @@ import androidx.room.Query
 import androidx.room.Upsert
 import com.example.imageapp.data.local.entity.UnsplashImageEntity
 
-@Dao interface EditorialFeedDao
-{
+import com.example.imageapp.data.local.entity.UnsplashRemoteKeys
 
 
-    @Query("SELECT *FROM image_entity_table")
-    fun getAllFeeImages(): PagingSource<Int, UnsplashImageEntity>
 
+
+@Dao
+interface EditorialFeedDao {
+
+    @Query("SELECT * FROM images_table")
+    fun getAllEditorialFeedImages(): PagingSource<Int, UnsplashImageEntity>
 
     @Upsert
-    suspend fun insetFeedImages(images: List<UnsplashImageEntity>)
+    suspend fun insertEditorialFeedImages(images: List<UnsplashImageEntity>)
 
+    @Query("DELETE FROM images_table")
+    suspend fun deleteAllEditorialFeedImages()
 
-    @Query("DELETE fROM image_entity_table")
-    suspend fun deleteFeedImages()
+    @Query("SELECT * FROM remote_keys_table WHERE id = :id")
+    suspend fun getRemoteKeys(id: String): UnsplashRemoteKeys
 
+    @Upsert
+    suspend fun insertAllRemoteKeys(remoteKeys: List<UnsplashRemoteKeys>)
+
+    @Query("DELETE FROM remote_keys_table")
+    suspend fun deleteAllRemoteKeys()
 
 }
