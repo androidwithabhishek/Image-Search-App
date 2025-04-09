@@ -9,6 +9,7 @@ import retrofit2.http.Query
 interface ImageRepository
 {
   suspend fun  getEditorialFeedImage(): List<UnsplashImage>
+//  chut apglu
 
   suspend fun getImage(imageId:String): UnsplashImage
 
