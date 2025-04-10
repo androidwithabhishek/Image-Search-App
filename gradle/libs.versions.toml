@@ -35,6 +35,7 @@ accessibilityTestFramework = "4.1.1"
 runner = "1.4.0"
 foundationLayoutAndroid = "1.7.6"
 pagingComposeAndroid = "3.3.6"
+identityCredential = "20231002"
 
 [libraries]
 accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanistWebview" }
@@ -86,6 +87,7 @@ accessibility-test-framework = { group = "com.google.android.apps.common.testing
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
 androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
+identity-credential = { group = "com.android.identity", name = "identity-credential", version.ref = "identityCredential" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

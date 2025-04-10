@@ -51,10 +51,10 @@ import javax.inject.Inject
 
     val favoriteImageIds: StateFlow<List<String>> =
             repository.getFavoriteImagesId().catch { exception ->
-                    _snackbarEvent.send(SnackbarEvent(message = "Something went wrong. ${exception.message}"))
-                }.stateIn(scope = viewModelScope,
-                          started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
-                          initialValue = emptyList())
+                _snackbarEvent.send(SnackbarEvent(message = "Something went wrong. ${exception.message}"))
+            }.stateIn(scope = viewModelScope,
+                      started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
+                      initialValue = emptyList())
 
 
     fun toggleFavoriteStatus(image: UnsplashImage)

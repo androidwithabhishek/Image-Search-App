@@ -22,7 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.paging.compose.LazyPagingItems
 import com.example.imageapp.Prsentation.components.HomeTopAppBar
+import com.example.imageapp.Prsentation.components.ImageVerticalGrid
 import com.example.imageapp.Prsentation.components.ZoomedImageCard
 import com.example.imageapp.R
 import com.example.imageapp.domain.model.UnsplashImage
@@ -30,28 +32,27 @@ import com.example.imageapp.utils.SnackbarEvent
 import kotlinx.coroutines.flow.Flow
 
 
-@OptIn(ExperimentalMaterial3Api::class) @Composable fun HomeScreen(
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeScreen(
     snackbarHostState: SnackbarHostState,
-    navController: NavHostController,
+
     snackbarEvent: Flow<SnackbarEvent>,
     scrollBehavior: TopAppBarScrollBehavior,
-    images: List<UnsplashImage>,
-//               favoriteImageIds: List<String>,
+    images: LazyPagingItems<UnsplashImage>,
+    favoriteImageIDs: List<String>,
     onImageClick: (String) -> Unit,
-
-
-//               ={
-//                    navController.navigate(Routes.FullScreen(it))
-//               },
-
+    toggleFavoriteStatus: (UnsplashImage) -> Unit,
     onSearchClick: () -> Unit,
     onFABClick: () -> Unit,
-//               onToggleFavoriteStatus: (UnsplashImage) -> Unit
-)
+
+
+    )
 {
 
     var showImagePreview by remember { mutableStateOf(false) }
     var activeImage by remember { mutableStateOf<UnsplashImage?>(null) }
+
 
     LaunchedEffect(key1 = true) {
         snackbarEvent.collect { event ->
@@ -69,15 +70,20 @@ import kotlinx.coroutines.flow.Flow
                           onSearchClick = onSearchClick)
 
 
-//            ImageVerticalGrid(
-//                    images = images,
-//                    onImageClick = onImageClick,
-//                    onImageDragStart = { image ->
-//                        activeImage = image showImagePreview = true
-//                    },
-//                    onImageDragEnd = { showImagePreview = false },
-//                  onToggleFavoriteStatus = onToggleFavoriteStatus
-//            )
+            ImageVerticalGrid(
+                    images = images,
+                    onImageClick = onImageClick,
+                    favoriteImageIDs = favoriteImageIDs,
+
+                    onImageDragStart = { image ->
+                        activeImage = image
+                        showImagePreview = true
+                    },
+                    onImageDragEnd = { showImagePreview = false },
+
+                    onFevClick = { toggleFavoriteStatus(it) },
+                    isFev = false,
+            )
 
 
         }

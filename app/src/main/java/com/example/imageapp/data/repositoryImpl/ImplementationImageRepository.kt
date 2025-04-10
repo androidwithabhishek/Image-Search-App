@@ -1,5 +1,6 @@
 package com.example.imageapp.data.repositoryImpl
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -9,6 +10,7 @@ import com.example.imageapp.data.maper.toDomainModel
 import com.example.imageapp.data.maper.toDomainModelList
 import com.example.imageapp.data.maper.toFavoriteImageEntity
 import com.example.imageapp.data.remote.UnsplashApiService
+import com.example.imageapp.data.serchPagingSource.EditorialFeedRemoteMediator
 import com.example.imageapp.data.utils.Constants.ITEMS_PER_PAGE
 import com.example.imageapp.data.serchPagingSource.SearchPagingSource
 import com.example.imageapp.domain.model.UnsplashImage
@@ -22,11 +24,20 @@ class ImplementationImageRepository(private val unsplashApi: UnsplashApiService,
 
 
     private val favoriteImagesDao = database.favoriteImagesDao()
+    private val editorialFeedDao = database.feedImageDao()
 
 
-    override suspend fun getEditorialFeedImage(): List<UnsplashImage>
+    @OptIn(ExperimentalPagingApi::class)
+    override fun getEditorialFeedImage(): Flow<PagingData<UnsplashImage>>
     {
-        return unsplashApi.getEditorialFeedImages().toDomainModelList()
+        return Pager(config = PagingConfig(pageSize = ITEMS_PER_PAGE),
+                     remoteMediator = EditorialFeedRemoteMediator(unsplashApi,database),
+                     pagingSourceFactory = {
+
+          editorialFeedDao.getAllEditorialFeedImages()
+        }).flow.map { pagingData->
+            pagingData.map { it.toDomainModel() }
+        }
     }
 
     override suspend fun getImage(imageId: String): UnsplashImage
