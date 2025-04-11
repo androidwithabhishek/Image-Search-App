@@ -6,6 +6,8 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -40,6 +42,7 @@ fun Navigation(modifier: Modifier = Modifier,
             val viewModel: MainViewModel = hiltViewModel()
             val favoriteImageIdsHome by viewModel.favoriteImageIds.collectAsStateWithLifecycle()
             val images = viewModel.images.collectAsLazyPagingItems()
+            var selectedIndex = remember { mutableStateOf(0) }
 
 
             HomeScreen(
@@ -47,9 +50,9 @@ fun Navigation(modifier: Modifier = Modifier,
                     snackbarHostState = snackbarState,
                     snackbarEvent = viewModel.snackbarEvent,
                     scrollBehavior = topAppBarScrollBehavior,
-                    onImageClick = { Imageid ->
+                    onImageClick = { Imageid, index ->
 
-                        navController.navigate(Routes.FullScreen(imageId = Imageid))
+                        navController.navigate(Routes.FullScreen(imageId = Imageid, index = index))
 
 
                     },
@@ -79,9 +82,11 @@ fun Navigation(modifier: Modifier = Modifier,
                          snackbarEvent = viewModelSearch.snackbarEvent,
                          scrollBehavior = topAppBarScrollBehavior,
                          images = searchFeed,
-                         onImageClick = { Imageid ->
+                         onImageClick = { Imageid, index ->
 
-                             navController.navigate(Routes.FullScreen(imageId = Imageid))
+
+                             navController.navigate(Routes.FullScreen(imageId = Imageid,
+                                                                      index = index))
                          },
                          onSearch = {
                              viewModelSearch.searchImages(it)
@@ -112,9 +117,10 @@ fun Navigation(modifier: Modifier = Modifier,
                       favoriteImageIDs = favoriteImageIds,
 
 
-                      onImageClick = { Imageid ->
+                      onImageClick = { Imageid, Index ->
 
-                          navController.navigate(Routes.FullScreen(imageId = Imageid))
+                          navController.navigate(Routes.FullScreen(imageId = Imageid,
+                                                                   index = Index))
                       },
                       toggleFavoriteStatus = {
 
@@ -126,23 +132,27 @@ fun Navigation(modifier: Modifier = Modifier,
 
         composable<Routes.FullScreen> { backStackEntry ->
 
-            val ImageId = backStackEntry.toRoute<Routes.FullScreen>().imageId
 
+            val selectedIndex = backStackEntry.toRoute<Routes.FullScreen>().index
             val fullScreenViewModel: FullScreenViewModel = hiltViewModel()
-            val image = fullScreenViewModel.image
-            FullImageScreen(snackbarEvent = fullScreenViewModel.snackbarEvent,
-                            snackbarState = snackbarState,
-                            navController = navController,
-                            image = image,
-                            onProfileClick = {
-                                navController.navigate(Routes.ProfileScreen(it))
-                            },
-                            onBackButtonClick = { navController.popBackStack() },
+            val mv: MainViewModel = hiltViewModel()
+            val images = mv.images.collectAsLazyPagingItems()
+            FullImageScreen(selectedIndex =selectedIndex,
+                            images = images,
+                            onBackButtonClick = {navController.navigateUp()},
+
+                            snackbarState =snackbarState ,
+                            snackbarEvent = fullScreenViewModel.snackbarEvent,
                             onImageDownloadTypeClick = { url, fileName ->
                                 fullScreenViewModel.downloadImage(url, fileName)
 
                             },
-                            ImageId = ImageId)
+                            onProfileClick = {
+                                navController.navigate(Routes.ProfileScreen(it))
+                            })
+
+
+
 
         }
 

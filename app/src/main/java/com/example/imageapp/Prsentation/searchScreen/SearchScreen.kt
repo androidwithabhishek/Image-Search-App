@@ -35,6 +35,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.compose.LazyPagingItems
+import androidx.room.Index
 import com.example.imageapp.Prsentation.components.ImageVerticalGrid
 import com.example.imageapp.Prsentation.components.ZoomedImageCard
 import com.example.imageapp.domain.model.UnsplashImage
@@ -57,7 +58,7 @@ fun SearchScreen(
                  favoriteImageIDs : List<String>,
                  onBackClick: () -> Unit = { navHostController.navigateUp() },
                  onSearch: (String) -> Unit,
-                 onImageClick: (String) -> Unit,
+                 onImageClick: (String,Int) -> Unit,
                  toggleFavoriteStatus :(UnsplashImage)->Unit
 
 )

@@ -41,7 +41,7 @@ fun HomeScreen(
     scrollBehavior: TopAppBarScrollBehavior,
     images: LazyPagingItems<UnsplashImage>,
     favoriteImageIDs: List<String>,
-    onImageClick: (String) -> Unit,
+    onImageClick: (String,index:Int) -> Unit,
     toggleFavoriteStatus: (UnsplashImage) -> Unit,
     onSearchClick: () -> Unit,
     onFABClick: () -> Unit,

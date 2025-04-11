@@ -142,7 +142,6 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
 
-
 //
 //    //Dagger-Hilt
     implementation(libs.hilt.android)
@@ -157,14 +156,19 @@ dependencies {
 //    implementation(libs.androidx.hilt.navigation.compose)
 
 
-
-
-
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
-    dependencies {
-        implementation("androidx.webkit:webkit:1.8.0")
-    }
+
+    implementation(libs.androidx.webkit)
+//    Simring effect
+    implementation (libs.accompanist.placeholder.material)
+
+    implementation("com.google.accompanist:accompanist-pager:0.34.0") // check latest
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.34.0")
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
+
 
 }

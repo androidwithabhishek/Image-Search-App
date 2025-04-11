@@ -16,7 +16,7 @@ import com.example.imageapp.domain.model.UnsplashImage
 
 @Composable fun ImageVerticalGrid(modifier: Modifier = Modifier,
                                   images: LazyPagingItems<UnsplashImage>,
-                                  onImageClick: (imageId: String) -> Unit,
+                                  onImageClick: (imageId: String,index:Int) -> Unit,
                                   onImageDragStart: (UnsplashImage?) -> Unit,
                                   onImageDragEnd: () -> Unit,
                                   onFevClick: (UnsplashImage) -> Unit,
@@ -35,7 +35,7 @@ import com.example.imageapp.domain.model.UnsplashImage
                 .clickable {
 
                     image?.id?.let { imageId ->
-                        onImageClick(imageId)
+                        onImageClick(imageId,index)
                     }
                 }
                 .pointerInput(Unit) {

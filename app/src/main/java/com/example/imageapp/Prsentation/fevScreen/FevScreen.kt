@@ -48,7 +48,7 @@ fun FevScreen(modifier: Modifier = Modifier,
               favoriteImageIDs: List<String>,
               onBackClick: () -> Unit = { navHostController.navigateUp() },
 
-              onImageClick: (String) -> Unit,
+              onImageClick: (String,Int) -> Unit,
               toggleFavoriteStatus: (UnsplashImage) -> Unit,
               onSearchClick: () -> Unit)
 {
