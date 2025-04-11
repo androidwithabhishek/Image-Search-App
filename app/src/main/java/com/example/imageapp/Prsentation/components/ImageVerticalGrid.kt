@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
@@ -21,8 +22,16 @@ import com.example.imageapp.domain.model.UnsplashImage
                                   onImageDragEnd: () -> Unit,
                                   onFevClick: (UnsplashImage) -> Unit,
                                   isFev: Boolean = true,
-                                  favoriteImageIDs:List<String>)
+                                  favoriteImageIDs:List<String>,
+
+
+)
+
 {
+
+
+
+
 
     LazyVerticalStaggeredGrid(modifier = Modifier,
                               columns = StaggeredGridCells.Adaptive(120.dp),
@@ -35,7 +44,7 @@ import com.example.imageapp.domain.model.UnsplashImage
                 .clickable {
 
                     image?.id?.let { imageId ->
-                        onImageClick(imageId,index)
+                        onImageClick(imageId, index)
                     }
                 }
                 .pointerInput(Unit) {

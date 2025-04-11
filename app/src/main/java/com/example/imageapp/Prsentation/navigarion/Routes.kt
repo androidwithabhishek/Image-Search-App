@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 sealed class Routes
 {
     @Serializable
-    data object HomeScreen : Routes()
+    object HomeScreen: Routes()
 
 
     @Serializable

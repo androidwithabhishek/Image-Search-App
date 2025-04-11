@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -47,6 +48,7 @@ fun HomeScreen(
     onFABClick: () -> Unit,
 
 
+
     )
 {
 
@@ -69,6 +71,8 @@ fun HomeScreen(
                           title = "ImageApp",
                           onSearchClick = onSearchClick)
 
+            val gridState = rememberLazyGridState()
+
 
             ImageVerticalGrid(
                     images = images,
@@ -83,6 +87,8 @@ fun HomeScreen(
 
                     onFevClick = { toggleFavoriteStatus(it) },
                     isFev = false,
+
+
             )
 
 

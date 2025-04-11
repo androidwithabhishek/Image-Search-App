@@ -85,6 +85,8 @@ Column {
 
                 onFevClick = { toggleFavoriteStatus(it) },
                 isFev = false,
+
+
         )
 
     }

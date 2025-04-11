@@ -169,8 +169,10 @@ fun SearchScreen(
                     },
                     onImageDragEnd = { showImagePreview = false },
 
-                    onFevClick = { toggleFavoriteStatus(it)} ,
+                    onFevClick = { toggleFavoriteStatus(it) },
                     isFev = false,
+
+
             )
 
         }

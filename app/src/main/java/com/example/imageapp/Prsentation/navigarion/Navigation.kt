@@ -66,6 +66,7 @@ fun Navigation(modifier: Modifier = Modifier,
                         viewModel.toggleFavoriteStatus(it)
 
                     },
+
             )
 
 
@@ -137,11 +138,11 @@ fun Navigation(modifier: Modifier = Modifier,
             val fullScreenViewModel: FullScreenViewModel = hiltViewModel()
             val mv: MainViewModel = hiltViewModel()
             val images = mv.images.collectAsLazyPagingItems()
-            FullImageScreen(selectedIndex =selectedIndex,
+            FullImageScreen(selectedIndex = selectedIndex,
                             images = images,
-                            onBackButtonClick = {navController.navigateUp()},
+                            onBackButtonClick = { navController.navigateUp() },
 
-                            snackbarState =snackbarState ,
+                            snackbarState = snackbarState,
                             snackbarEvent = fullScreenViewModel.snackbarEvent,
                             onImageDownloadTypeClick = { url, fileName ->
                                 fullScreenViewModel.downloadImage(url, fileName)
@@ -149,9 +150,10 @@ fun Navigation(modifier: Modifier = Modifier,
                             },
                             onProfileClick = {
                                 navController.navigate(Routes.ProfileScreen(it))
-                            })
+                            },
 
 
+            )
 
 
         }
