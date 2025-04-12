@@ -29,7 +29,7 @@ fun DownLoadBottomSheet(onDismissRequest: () -> Unit,
                 modifier = Modifier,
                 sheetState = sheetState,
                 onDismissRequest = { onDismissRequest() },
-                        ) {
+        ) {
 
 
             option.forEach() { option ->

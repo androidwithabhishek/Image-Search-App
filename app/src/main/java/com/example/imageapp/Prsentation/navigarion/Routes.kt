@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 sealed class Routes
 {
     @Serializable
-    data object HomeScreen : Routes()
+    object HomeScreen: Routes()
 
 
     @Serializable
@@ -18,7 +18,7 @@ sealed class Routes
 
 
     @Serializable
-    data class FullScreen(val imageId: String) : Routes()
+    data class FullScreen(val imageId: String, val index:Int) : Routes()
 
     @Serializable
     data class ProfileScreen(val profileLink: String) : Routes()

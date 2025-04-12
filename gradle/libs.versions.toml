@@ -1,4 +1,5 @@
 [versions]
+accompanistPlaceholderMaterial = "0.35.0-alpha"
 accompanistWebview = "0.31.1-alpha"
 agp = "8.8.2"
 cloudy = "0.2.6"
@@ -36,8 +37,10 @@ runner = "1.4.0"
 foundationLayoutAndroid = "1.7.6"
 pagingComposeAndroid = "3.3.6"
 identityCredential = "20231002"
+webkit = "1.13.0"
 
 [libraries]
+accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanistPlaceholderMaterial" }
 accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanistWebview" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
@@ -49,6 +52,7 @@ androidx-room-compiler-v250 = { module = "androidx.room:room-compiler", version.
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomPaging" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomPaging" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomPaging" }
+androidx-webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
 cloudy = { module = "com.github.skydoves:cloudy", version.ref = "cloudy" }
 coil = { module = "io.coil-kt:coil", version.ref = "coilComposeVersion" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
