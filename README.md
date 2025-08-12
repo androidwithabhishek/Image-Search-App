@@ -19,7 +19,7 @@
 
 # 📥 Download  
 
-[![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](./readme-assets/app-release-unsigned.apk)
+[![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](./readme-assets/app-release.apk)
 
 ---
 
