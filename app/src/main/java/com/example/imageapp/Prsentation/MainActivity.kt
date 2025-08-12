@@ -91,7 +91,7 @@ class MainActivity : ComponentActivity()
                                modifier = Modifier.padding(innerPadding),
 
                                topAppBarScrollBehavior = topAppBarScrollBehavior,
-                               snackbarState = snackbarState)
+                               snackBarState = snackbarState)
 
 
 //                    image123@

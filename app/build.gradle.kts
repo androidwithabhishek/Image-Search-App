@@ -24,6 +24,7 @@ plugins {
 
 }
 
+
 android {
     namespace = "com.example.imageapp"
     compileSdk = 35

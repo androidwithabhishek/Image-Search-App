@@ -22,14 +22,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import androidx.paging.compose.LazyPagingItems
 import com.example.imageapp.Prsentation.components.HomeTopAppBar
 import com.example.imageapp.Prsentation.components.ImageVerticalGrid
 import com.example.imageapp.Prsentation.components.ZoomedImageCard
 import com.example.imageapp.R
 import com.example.imageapp.domain.model.UnsplashImage
-import com.example.imageapp.utils.SnackbarEvent
+import com.example.imageapp.utils.SnackBarEvent
 import kotlinx.coroutines.flow.Flow
 
 
@@ -38,7 +37,7 @@ import kotlinx.coroutines.flow.Flow
 fun HomeScreen(
     snackbarHostState: SnackbarHostState,
 
-    snackbarEvent: Flow<SnackbarEvent>,
+    snackbarEvent: Flow<SnackBarEvent>,
     scrollBehavior: TopAppBarScrollBehavior,
     images: LazyPagingItems<UnsplashImage>,
     favoriteImageIDs: List<String>,

@@ -7,7 +7,7 @@ import androidx.paging.cachedIn
 import com.example.imageapp.domain.model.UnsplashImage
 import com.example.imageapp.domain.repository.ImageRepository
 import com.example.imageapp.domain.repository.NetworkConnectivityObserver
-import com.example.imageapp.utils.SnackbarEvent
+import com.example.imageapp.utils.SnackBarEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +25,7 @@ import javax.inject.Inject
 {
 
 
-    private val _snackbarEvent = Channel<SnackbarEvent>()
+    private val _snackbarEvent = Channel<SnackBarEvent>()
     val snackbarEvent = _snackbarEvent.receiveAsFlow()
 
     private val _searchImages = MutableStateFlow<PagingData<UnsplashImage>>(PagingData.empty())
@@ -42,7 +42,7 @@ import javax.inject.Inject
                     .collect { _searchImages.value = it }
             } catch (e: Exception)
             {
-                _snackbarEvent.send(SnackbarEvent(message = "Somthing went worong ${e.message}"))
+                _snackbarEvent.send(SnackBarEvent(message = "Somthing went worong ${e.message}"))
             }
         }
 
@@ -51,7 +51,7 @@ import javax.inject.Inject
 
     val favoriteImageIds: StateFlow<List<String>> =
             repository.getFavoriteImagesId().catch { exception ->
-                _snackbarEvent.send(SnackbarEvent(message = "Something went wrong. ${exception.message}"))
+                _snackbarEvent.send(SnackBarEvent(message = "Something went wrong. ${exception.message}"))
             }.stateIn(scope = viewModelScope,
                       started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
                       initialValue = emptyList())
@@ -69,7 +69,7 @@ import javax.inject.Inject
 
             } catch (e: Exception)
             {
-                _snackbarEvent.send(SnackbarEvent(message = "Somthing went worong ${e.message}"))
+                _snackbarEvent.send(SnackBarEvent(message = "Somthing went worong ${e.message}"))
             }
         }
     }

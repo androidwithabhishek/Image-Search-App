@@ -43,67 +43,84 @@ import com.example.imageapp.R
 import com.example.imageapp.domain.model.UnsplashImage
 
 
-@OptIn(ExperimentalMaterial3Api::class) @Composable fun HomeTopAppBar(modifier: Modifier = Modifier,
-                                                                      TopAppBarScrollBehavior: TopAppBarScrollBehavior,
-                                                                      title: String,
-                                                                      onSearchClick:()->Unit)
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeTopAppBar(
+    modifier: Modifier = Modifier,
+    TopAppBarScrollBehavior: TopAppBarScrollBehavior,
+    title: String,
+    onSearchClick: () -> Unit
+) {
+    CenterAlignedTopAppBar(
+        scrollBehavior = TopAppBarScrollBehavior,
+        title = {
+            Text(text = buildAnnotatedString {
+                withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+                    append(title.split(title).first())
+                }
+                withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.secondary)) {
+                    append(title.split(" ").last())
+                }
+            }, fontWeight = FontWeight.ExtraBold, fontSize = 30.sp)
+        },
+        actions = {
+            IconButton(onClick = {
+                onSearchClick()
 
-{
-    CenterAlignedTopAppBar(scrollBehavior = TopAppBarScrollBehavior,
-                           title = {
-                               Text(text = buildAnnotatedString {
-                                   withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
-                                       append(title.split(title).first())
-                                   }
-                                   withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.secondary)) {
-                                       append(title.split(" ").last())
-                                   }
-                               }, fontWeight = FontWeight.ExtraBold, fontSize = 30.sp)
-                           },
-                           actions = {
-                               IconButton(onClick = {
-                                   onSearchClick()
 
-//                                   navController.navigate(Routes.SearchScreen)
-                               }) {
+            }) {
 
-                                   Icon(imageVector = Icons.Filled.Search,
-                                        contentDescription = null)
+                Icon(
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = null
+                )
 
-                               }
-                           },
-                           colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                                   scrolledContainerColor = MaterialTheme.colorScheme.background))
+            }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            scrolledContainerColor = MaterialTheme.colorScheme.background
+        )
+    )
 }
 
 
-@Composable fun FullScreenTopBar(modifier: Modifier = Modifier,
-                                 isVisible: Boolean,
-                                 onBackButtonClick: () -> Unit,
-                                 onProfileClick: (String) -> Unit,
-                                 onDownloadClick: () -> Unit,
-                                 image: UnsplashImage?)
-{
+@Composable
+fun FullScreenTopBar(
+    modifier: Modifier = Modifier,
+    isVisible: Boolean,
+    onBackButtonClick: () -> Unit,
+    onProfileClick: (String) -> Unit,
+    onDownloadClick: () -> Unit,
+    image: UnsplashImage?
+) {
     Box() {
 
-        AnimatedVisibility(isVisible,
-                           enter = fadeIn() + slideInVertically(),
-                           exit = fadeOut() + slideOutVertically()) {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(top = 35.dp)) {
+        AnimatedVisibility(
+            isVisible,
+            enter = fadeIn() + slideInVertically(),
+            exit = fadeOut() + slideOutVertically()
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(top = 35.dp)
+            ) {
                 IconButton(onClick = {
                     onBackButtonClick()
                 }) {
                     Spacer(modifier = Modifier.width(10.dp))
-                    Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                         contentDescription = null,modifier=Modifier.padding(start = 5.dp))
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = null, modifier = Modifier.padding(start = 5.dp)
+                    )
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                AsyncImage(modifier = Modifier
-                    .size(30.dp)
-                    .clip(CircleShape),
-                           model = image?.photographerImageUrl,
-                           contentDescription = null)
+                AsyncImage(
+                    modifier = Modifier
+                        .size(30.dp)
+                        .clip(CircleShape),
+                    model = image?.photographerImageUrl,
+                    contentDescription = null
+                )
 
                 Spacer(modifier = Modifier.width(20.dp))
 
@@ -115,11 +132,15 @@ import com.example.imageapp.domain.model.UnsplashImage
 
                 }) {
 
-                    Text(text = image?.photographerName ?: "",
-                         style = MaterialTheme.typography.titleMedium)
+                    Text(
+                        text = image?.photographerName ?: "",
+                        style = MaterialTheme.typography.titleMedium
+                    )
 
-                    Text(text = image?.photographerUsername ?: "",
-                         style = MaterialTheme.typography.bodySmall)
+                    Text(
+                        text = image?.photographerUsername ?: "",
+                        style = MaterialTheme.typography.bodySmall
+                    )
 
                 }
 
@@ -129,14 +150,15 @@ import com.example.imageapp.domain.model.UnsplashImage
 
                 IconButton(onClick = { onDownloadClick() }) {
 
-                    Icon(painter = painterResource(R.drawable.baseline_download_24),
-                         contentDescription = null,
-                         tint = MaterialTheme.colorScheme.onBackground)
+                    Icon(
+                        painter = painterResource(R.drawable.baseline_download_24),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onBackground
+                    )
 
 
                 }
                 Spacer(modifier = Modifier.width(20.dp))
-
 
 
             }
