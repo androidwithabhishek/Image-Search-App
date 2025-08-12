@@ -20,3 +20,21 @@
 # 📥 Download  
 
 [![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](./readme-assets/app-release-unsigned.apk)
+
+---
+
+## 🙏 Special Thanks  
+A huge thanks to **Mohammad Arif** for his guidance and tutorials, which were a big help in creating this project.  
+🎥 [Watch his tutorial playlist here](https://youtube.com/playlist?list=PL1b73-6UjePBns1mFhHNhZvIUXEFNdd8c&si=0GKIp4k8UgyHTCQs)  
+
+---
+
+## 🛠️ Improvements I Made Beyond the Tutorial  
+While following the tutorial, I made several enhancements to improve performance, design, and user experience:  
+
+- **Material 3 UI** for a more modern and responsive design  
+- **Better error handling** using `Result` parameters  
+- **Image preloading** with Coil for faster and smoother scrolling  
+- **Enhanced dark mode** support with improved color schemes  
+- **Shimmer effect** for loading states (not present in the tutorial)  
+- **Additional UI/UX refinements** for a polished look and feel  
