@@ -1,7 +1,3 @@
-
-
-
-
 # **Technology I Used**
 
 - **Jetpack Compose:** To build the User Interface
@@ -17,13 +13,7 @@
 
 | Main Feed Screen                  | Search Screen                     | Bookmarks Screen                  |
 |-----------------------------------|-----------------------------------|-----------------------------------|
-| <img width="160" src="./readme-assets/2.gif"> | <img width="160" src="./readme-assets/7.gif">  | <img width="160" src="./readme-assets/8.gif"> |
-| Profile (WebView)                 | Splash Screen                     | Preview Image                     | 
-| <img width="160" src="./readme-assets/6.gif"> | <img width="160" src="./readme-assets/1.gif">  | <img width="160" src="./readme-assets/3.gif"> |
-| Zoom Image                        | Download Image                    | Dark Mode                         |
-| <img width="160" src="./readme-assets/4.gif"> | <img width="160" src="./readme-assets/5.gif">  | <img width="160" src="./readme-assets/9.gif"> |
-
-
-
-
+| <img width="160" src="./readme-assets/2.gif"> | <img width="160" src="./readme-assets/7.gif"> | <img width="160" src="./readme-assets/8.gif"> |
+| Profile (WebView)                 | Preview Image                     | Zoom Image                        |
+| <img width="160" src="./readme-assets/6.gif"> | <img width="160" src="./readme-assets/3.gif"> | <img width="160" src="./readme-assets/4.gif"> |
 
