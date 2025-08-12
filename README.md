@@ -2,7 +2,7 @@
 
 
 
-# :building_construction: Technology I Used :building_construction:
+# **Technology I Used**
 
 - **Jetpack Compose:** To build the User Interface
 - **Material 3:** To Design a beautiful and consistent UI.
@@ -22,6 +22,7 @@
 | <img width="160" src="./readme-assets/6.gif"> | <img width="160" src="./readme-assets/1.gif">  | <img width="160" src="./readme-assets/3.gif"> |
 | Zoom Image                        | Download Image                    | Dark Mode                         |
 | <img width="160" src="./readme-assets/4.gif"> | <img width="160" src="./readme-assets/5.gif">  | <img width="160" src="./readme-assets/9.gif"> |
+
 
 
 
