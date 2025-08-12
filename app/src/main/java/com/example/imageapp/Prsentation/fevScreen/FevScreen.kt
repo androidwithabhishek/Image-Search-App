@@ -1,7 +1,6 @@
 package com.example.imageapp.Prsentation.fevScreen
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,7 +32,7 @@ import com.example.imageapp.Prsentation.components.ImageVerticalGrid
 import com.example.imageapp.Prsentation.components.ZoomedImageCard
 import com.example.imageapp.R
 import com.example.imageapp.domain.model.UnsplashImage
-import com.example.imageapp.utils.SnackbarEvent
+import com.example.imageapp.utils.SnackBarEvent
 import kotlinx.coroutines.flow.Flow
 
 
@@ -42,7 +41,7 @@ import kotlinx.coroutines.flow.Flow
 fun FevScreen(modifier: Modifier = Modifier,
               snackbarHostState: SnackbarHostState,
               navHostController: NavHostController,
-              snackbarEvent: Flow<SnackbarEvent>,
+              snackbarEvent: Flow<SnackBarEvent>,
               scrollBehavior: TopAppBarScrollBehavior,
               images: LazyPagingItems<UnsplashImage>,
               favoriteImageIDs: List<String>,

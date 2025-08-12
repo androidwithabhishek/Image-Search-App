@@ -16,45 +16,51 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterial3Api::class) @Composable
-fun DownLoadBottomSheet(onDismissRequest: () -> Unit,
-                        sheetState: SheetState,
-                        isOpen: Boolean,
-                        onLabelClick: (ImageDownloadOption) -> Unit,
-                        option: List<ImageDownloadOption> = ImageDownloadOption.entries)
-{
-    if (isOpen)
-    {
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DownLoadBottomSheet(
+    onDismissRequest: () -> Unit,
+    sheetState: SheetState,
+    isOpen: Boolean,
+    onLabelClick: (ImageDownloadOption) -> Unit,
+    option: List<ImageDownloadOption> = ImageDownloadOption.entries
+) {
+    if (isOpen) {
         ModalBottomSheet(
-                modifier = Modifier,
-                sheetState = sheetState,
-                onDismissRequest = { onDismissRequest() },
+            modifier = Modifier,
+            sheetState = sheetState,
+            onDismissRequest = { onDismissRequest() },
         ) {
 
 
             option.forEach() { option ->
 
 
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .clickable { onLabelClick(option) }) {
-                    Text(text = option.label,
-                         style = MaterialTheme.typography.bodyLarge,
-                         modifier = Modifier.align(Alignment.Center))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .clickable { onLabelClick(option) }) {
+                    Text(
+                        text = option.label,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
                 }
 
 
-
             }
-            Spacer(modifier = Modifier.height(25.dp).padding(bottom = 40.dp))
+            Spacer(modifier = Modifier
+                .height(25.dp)
+                .padding(bottom = 40.dp))
 
         }
     }
 
 }
 
-enum class ImageDownloadOption(val label: String)
-{
-    SMALL(label = "Download Small Size"), MEDIUM(label = "Download Medium Size"), ORIGINAL(label = "Download Original Size"),
+enum class ImageDownloadOption(val label: String) {
+    SMALL(label = "Download Small Size"),
+    MEDIUM(label = "Download Medium Size"),
+    ORIGINAL(label = "Download Original Size"),
 }

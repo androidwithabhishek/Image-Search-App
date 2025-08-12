@@ -35,11 +35,10 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.compose.LazyPagingItems
-import androidx.room.Index
 import com.example.imageapp.Prsentation.components.ImageVerticalGrid
 import com.example.imageapp.Prsentation.components.ZoomedImageCard
 import com.example.imageapp.domain.model.UnsplashImage
-import com.example.imageapp.utils.SnackbarEvent
+import com.example.imageapp.utils.SnackBarEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -51,15 +50,15 @@ import kotlinx.coroutines.launch
 fun SearchScreen(
 
     snackbarHostState: SnackbarHostState,
-                 navHostController: NavHostController,
-                 snackbarEvent: Flow<SnackbarEvent>,
-                 scrollBehavior: TopAppBarScrollBehavior,
-                 images: LazyPagingItems<UnsplashImage>,
-                 favoriteImageIDs : List<String>,
-                 onBackClick: () -> Unit = { navHostController.navigateUp() },
-                 onSearch: (String) -> Unit,
-                 onImageClick: (String,Int) -> Unit,
-                 toggleFavoriteStatus :(UnsplashImage)->Unit
+    navHostController: NavHostController,
+    snackbarEvent: Flow<SnackBarEvent>,
+    scrollBehavior: TopAppBarScrollBehavior,
+    images: LazyPagingItems<UnsplashImage>,
+    favoriteImageIDs : List<String>,
+    onBackClick: () -> Unit = { navHostController.navigateUp() },
+    onSearch: (String) -> Unit,
+    onImageClick: (String,Int) -> Unit,
+    toggleFavoriteStatus :(UnsplashImage)->Unit
 
 )
 {

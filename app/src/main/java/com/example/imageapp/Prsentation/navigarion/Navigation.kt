@@ -30,7 +30,7 @@ import com.example.imagevista.presentation.full_image_screen.FullImageScreen
 @Composable
 fun Navigation(modifier: Modifier = Modifier,
                navController: NavHostController,
-               snackbarState: SnackbarHostState,
+               snackBarState: SnackbarHostState,
 
                topAppBarScrollBehavior: TopAppBarScrollBehavior)
 {
@@ -47,7 +47,7 @@ fun Navigation(modifier: Modifier = Modifier,
 
             HomeScreen(
                     images = images,
-                    snackbarHostState = snackbarState,
+                    snackbarHostState = snackBarState,
                     snackbarEvent = viewModel.snackbarEvent,
                     scrollBehavior = topAppBarScrollBehavior,
                     onImageClick = { Imageid, index ->
@@ -78,7 +78,7 @@ fun Navigation(modifier: Modifier = Modifier,
             val searchFeed = viewModelSearch.searchImages.collectAsLazyPagingItems()
             val favoriteImageIds by viewModelSearch.favoriteImageIds.collectAsStateWithLifecycle()
 
-            SearchScreen(snackbarHostState = snackbarState,
+            SearchScreen(snackbarHostState = snackBarState,
                          navHostController = navController,
                          snackbarEvent = viewModelSearch.snackbarEvent,
                          scrollBehavior = topAppBarScrollBehavior,
@@ -110,7 +110,7 @@ fun Navigation(modifier: Modifier = Modifier,
             val favViewMode: FavViewMode = hiltViewModel()
             val favImages = favViewMode.favoriteImage.collectAsLazyPagingItems()
             val favoriteImageIds by favViewMode.favoriteImageIds.collectAsStateWithLifecycle()
-            FevScreen(snackbarHostState = snackbarState,
+            FevScreen(snackbarHostState = snackBarState,
                       navHostController = navController,
                       snackbarEvent = favViewMode.snackbarEvent,
                       scrollBehavior = topAppBarScrollBehavior,
@@ -134,25 +134,23 @@ fun Navigation(modifier: Modifier = Modifier,
         composable<Routes.FullScreen> { backStackEntry ->
 
 
-            val selectedIndex = backStackEntry.toRoute<Routes.FullScreen>().index
+
             val fullScreenViewModel: FullScreenViewModel = hiltViewModel()
-            val mv: MainViewModel = hiltViewModel()
-            val images = mv.images.collectAsLazyPagingItems()
-            FullImageScreen(selectedIndex = selectedIndex,
-                            images = images,
-                            onBackButtonClick = { navController.navigateUp() },
 
-                            snackbarState = snackbarState,
-                            snackbarEvent = fullScreenViewModel.snackbarEvent,
-                            onImageDownloadTypeClick = { url, fileName ->
-                                fullScreenViewModel.downloadImage(url, fileName)
-
-                            },
-                            onProfileClick = {
-                                navController.navigate(Routes.ProfileScreen(it))
-                            },
+            val image = fullScreenViewModel.image
 
 
+            FullImageScreen(
+                snackBarHostState = snackBarState,
+                snackBarEvent = fullScreenViewModel.snackBarEvent,
+                imageClass = image,
+                onBackClick = { navController.navigateUp()},
+                onPhotographerNameClick = { profileLink ->
+                    navController.navigate(Routes.ProfileScreen(profileLink))
+                },
+                OnImageDownloadClick = { url, title ->
+                    fullScreenViewModel.downloadImage(url, title = title.toString())
+                }
             )
 
 

@@ -24,6 +24,7 @@ plugins {
 
 }
 
+
 android {
     namespace = "com.example.imageapp"
     compileSdk = 35
@@ -43,6 +44,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"),
                           "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
