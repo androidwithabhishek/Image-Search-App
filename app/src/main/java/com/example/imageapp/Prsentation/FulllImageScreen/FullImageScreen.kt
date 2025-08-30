@@ -36,12 +36,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RenderEffect
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.CachePolicy
@@ -151,10 +155,10 @@ fun FullImageScreen(
 
 
     Box(
-        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize(),
     ) {
         BoxWithConstraints(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),contentAlignment = Alignment.Center
 
             ) {
 
@@ -171,6 +175,20 @@ fun FullImageScreen(
                     y = (offset.y + offsetChange.y).coerceIn(-maxY, maxY)
                 )
             }
+
+            Image(
+                painter = if (state is AsyncImagePainter.State.Loading) thumbnailPainter else painter,
+                contentDescription = "Full Image",
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .blur(999999999.dp)
+                    .alpha(1f)
+                    .fillMaxSize()
+
+            )
+
+
+
 
             Image(
                 painter = if (state is AsyncImagePainter.State.Loading) thumbnailPainter else painter,
@@ -199,10 +217,21 @@ fun FullImageScreen(
                         scaleY = scale
                         translationX = offset.x
                         translationY = offset.y
+
+
+
                     })
 
-
+            if (thumbnailPainterState is AsyncImagePainter.State.Error) {
+                CircularProgressIndicator(color = Color.White,)
+            }
         }
+
+
+
+
+
+
 
 
         FullScreenTopBar(
@@ -215,11 +244,6 @@ fun FullImageScreen(
             onBackButtonClick = onBackClick,
             onProfileClick = onPhotographerNameClick,
             onDownloadClick = { isDownloadBottomSheetOpen = true })
-
-
-        if (thumbnailPainterState is AsyncImagePainter.State.Error) {
-            CircularProgressIndicator(color = Color.White)
-        }
 
     }
 
