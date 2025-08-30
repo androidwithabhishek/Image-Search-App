@@ -82,19 +82,11 @@ fun FullImageScreen(
     val imageUrl = imageClass?.imageUrlRegular
     val thumbnailUrl = imageClass?.imageUrlRegular
 
-    val imageRequest = ImageRequest.Builder(context)
-        .data(imageUrl)
-        .crossfade(false)
-        .diskCachePolicy(CachePolicy.ENABLED)
-        .memoryCachePolicy(CachePolicy.ENABLED)
-        .build()
+    val imageRequest = ImageRequest.Builder(context).data(image).crossfade(false)
+        .diskCachePolicy(CachePolicy.ENABLED).memoryCachePolicy(CachePolicy.ENABLED).build()
 
-    val imageRequestThumb = ImageRequest.Builder(context)
-        .data(thumbnailUrl)
-        .crossfade(false)
-        .diskCachePolicy(CachePolicy.ENABLED)
-        .memoryCachePolicy(CachePolicy.ENABLED)
-        .build()
+    val imageRequestThumb = ImageRequest.Builder(context).data(thumbnailUrl).crossfade(false)
+        .diskCachePolicy(CachePolicy.ENABLED).memoryCachePolicy(CachePolicy.ENABLED).build()
 
     val painter = rememberAsyncImagePainter(model = imageRequest)
     val thumbnailPainter = rememberAsyncImagePainter(model = imageRequestThumb)
@@ -108,8 +100,7 @@ fun FullImageScreen(
     LaunchedEffect(true) {
         snackBarEvent.collect { event ->
             snackBarHostState.showSnackbar(
-                message = event.message,
-                duration = event.duration
+                message = event.message, duration = event.duration
             )
         }
 
@@ -160,12 +151,12 @@ fun FullImageScreen(
 
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ) {
         BoxWithConstraints(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
+
+            ) {
 
 
             var scale by remember { mutableFloatStateOf(1f) }
@@ -202,21 +193,17 @@ fun FullImageScreen(
                             windowInsetsController.toggleStatusBars(show = showBars)
                         },
                         indication = null,
-                        interactionSource = remember { MutableInteractionSource() }
-                    )
+                        interactionSource = remember { MutableInteractionSource() })
                     .graphicsLayer {
                         scaleX = scale
                         scaleY = scale
                         translationX = offset.x
                         translationY = offset.y
-                    }
-            )
+                    })
 
 
         }
-        if (thumbnailPainterState is AsyncImagePainter.State.Error) {
-            CircularProgressIndicator(color = Color.White)
-        }
+
 
         FullScreenTopBar(
             modifier = Modifier
@@ -227,8 +214,13 @@ fun FullImageScreen(
             isVisible = showBars,
             onBackButtonClick = onBackClick,
             onProfileClick = onPhotographerNameClick,
-            onDownloadClick = { isDownloadBottomSheetOpen = true }
-        )
+            onDownloadClick = { isDownloadBottomSheetOpen = true })
+
+
+        if (thumbnailPainterState is AsyncImagePainter.State.Error) {
+            CircularProgressIndicator(color = Color.White)
+        }
+
     }
 
 
