@@ -9,6 +9,26 @@
 - **Retrofit:** To make network requests and handle API responses  
 - **Room:** To store and manage local data  
 
+
+
+
+
+## 🛠️ key points
+- **Material 3 UI** for a modern and responsive design
+- **Better error handling** using `Result` wrappers
+- **Adaptive background blur** with stunning blur and glow effects
+- **Adaptive background blur** with stunning background blur and glow effects
+- **Image preloading** with Coil for faster and smoother performance
+- **Enhanced dark mode** support with improved color schemes
+- **Shimmer effect** for loading states
+- **Additional UI/UX refinements** for a polished look and feel
+- **Responsive design** that works seamlessly on tablets and all screen sizes
+
+
+
+
+
+
 # **Screenshots**  
 
 | Main Feed Screen                  | Search Screen                     | Bookmarks Screen                  |
@@ -25,15 +45,4 @@
 
 
 ---
-
-## 🛠️ key points
-- **Material 3 UI** for a modern and responsive design
-- **Better error handling** using `Result` wrappers
-- **Adaptive background blur** with stunning blur and glow effects
-- **Adaptive background blur** with stunning background blur and glow effects
-- **Image preloading** with Coil for faster and smoother performance
-- **Enhanced dark mode** support with improved color schemes
-- **Shimmer effect** for loading states
-- **Additional UI/UX refinements** for a polished look and feel
-- **Responsive design** that works seamlessly on tablets and all screen sizes  
 
