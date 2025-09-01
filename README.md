@@ -1,5 +1,5 @@
 # **Technology I Used**
-
+---
 - **Jetpack Compose:** To build the User Interface  
 - **Material 3:** To design a beautiful and consistent UI  
 - **Paging 3:** To implement efficient and smooth infinite scrolling  
@@ -14,6 +14,7 @@
 
 
 ## 🛠️ key points
+---
 - **Material 3 UI** for a modern and responsive design
 - **Better error handling** using `Result` wrappers
 - **Adaptive background blur** with stunning blur and glow effects
@@ -30,7 +31,7 @@
 
 
 # **Screenshots**  
-
+---
 | Main Feed Screen                  | Search Screen                     | Bookmarks Screen                  |
 |-----------------------------------|------------------------------------|------------------------------------|
 | <img width="160" src="./readme-assets/2.gif"> | <img width="160" src="./readme-assets/7.gif"> | <img width="160" src="./readme-assets/8.gif"> |
@@ -38,11 +39,11 @@
 | <img width="160" src="./readme-assets/6.gif"> | <img width="160" src="./readme-assets/3.gif"> | <img width="160" src="./readme-assets/4.gif"> |
 
 # 📥 Download  
-
+---
 [![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](./readme-assets/app-release.apk)
 
 ---
 
 
----
+
 
