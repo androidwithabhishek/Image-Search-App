@@ -26,9 +26,7 @@
 
 ---
 
-## 🛠️ key points  
-While following the tutorial, I made several enhancements to improve performance, design, and user experience:  
-
+## 🛠️ key points
 - **Material 3 UI** for a modern and responsive design
 - **Better error handling** using `Result` wrappers
 - **Adaptive background blur** with stunning blur and glow effects
