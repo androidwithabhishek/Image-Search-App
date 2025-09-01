@@ -84,7 +84,7 @@ fun FullImageScreen(
 
     val image = imageClass?.imageUrlRaw
     val imageUrl = imageClass?.imageUrlRegular
-    val thumbnailUrl = imageClass?.imageUrlRegular
+    val thumbnailUrl = imageClass?.imageUrlSmall
 
     val imageRequest = ImageRequest.Builder(context).data(image).crossfade(false)
         .diskCachePolicy(CachePolicy.ENABLED).memoryCachePolicy(CachePolicy.ENABLED).build()
@@ -222,7 +222,7 @@ fun FullImageScreen(
 
                     })
 
-            if (thumbnailPainterState is AsyncImagePainter.State.Error) {
+            if (thumbnailPainterState is AsyncImagePainter.State.Loading) {
                 CircularProgressIndicator(color = Color.White,)
             }
         }
