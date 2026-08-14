@@ -27,12 +27,12 @@ plugins {
 
 android {
     namespace = "com.example.imageapp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.imageapp"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
@@ -171,6 +172,6 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.4.0")
 
-
+    implementation("androidx.compose.material:material-icons-extended")
 
 }

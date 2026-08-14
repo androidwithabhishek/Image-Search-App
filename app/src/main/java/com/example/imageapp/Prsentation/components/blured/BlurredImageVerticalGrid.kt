@@ -1,4 +1,8 @@
-package com.example.imageapp.Prsentation.components
+package com.example.imageapp.Prsentation.components.blured
+
+import com.example.imageapp.Prsentation.components.ImageCard
+
+
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
@@ -20,7 +24,7 @@ import com.example.imageapp.domain.model.UnsplashImage
 
 
 @Composable
-fun ImageVerticalGrid(
+fun BlurredImageVerticalGrid(
     modifier: Modifier = Modifier,
     images: LazyPagingItems<UnsplashImage>,
     onImageClick: (imageId: String, index: Int) -> Unit,
@@ -36,17 +40,18 @@ fun ImageVerticalGrid(
     val scrollState = rememberLazyStaggeredGridState()
 
     Box(modifier = Modifier.fillMaxSize()) {
+
         LazyVerticalStaggeredGrid(
-            modifier = Modifier,
             state = scrollState,
             columns = StaggeredGridCells.Adaptive(120.dp),
             contentPadding = PaddingValues(10.dp),
             verticalItemSpacing = 10.dp,
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier.blur(100.dp)
         ) {
             items(count = images.itemCount) { index: Int ->
                 val image = images[index]
-                ImageCard(
+                BluerImageCard(
                     image = image, modifier = Modifier
                         .clickable {
 
@@ -61,16 +66,17 @@ fun ImageVerticalGrid(
                                 onDragEnd = { onImageDragEnd() },
                                 onDrag = { _, _ -> })
                         }, onFevClick = {
-                    image?.let {
-                        onFevClick(it)
-                    }
-                }, isFev = favoriteImageIDs.contains(image?.id)
+                        image?.let {
+                            onFevClick(it)
+                        }
+                    }, isFev = favoriteImageIDs.contains(image?.id)
                 )
 
             }
 
 
         }
+
     }
 
 

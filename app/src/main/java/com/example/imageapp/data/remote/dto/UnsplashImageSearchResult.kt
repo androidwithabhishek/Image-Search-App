@@ -1,4 +1,4 @@
-package com.example.imageapp.data.remote.dto2
+package com.example.imageapp.data.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
