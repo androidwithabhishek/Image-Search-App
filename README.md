@@ -1,49 +1,44 @@
 # **Technology I Used**
 ---
-- **Jetpack Compose:** To build the User Interface  
-- **Material 3:** To design a beautiful and consistent UI  
-- **Paging 3:** To implement efficient and smooth infinite scrolling  
-- **Coil:** To load and display images effortlessly  
-- **Dagger Hilt:** To manage dependency injection for cleaner, modular code  
-- **Compose Navigation:** To navigate between screens seamlessly  
-- **Retrofit:** To make network requests and handle API responses  
-- **Room:** To store and manage local data  
 
+- **Jetpack Compose:** Built the user interface with a modern declarative approach
+- **Material 3:** Created a consistent, modern, and responsive design
+- **Paging 3:** Implemented smooth and efficient infinite scrolling
+- **Coil:** Loaded and displayed images efficiently
+- **Dagger Hilt:** Managed dependency injection for a clean and maintainable architecture
+- **Compose Navigation:** Handled seamless navigation between screens
+- **Retrofit:** Integrated REST APIs and handled network communication
+- **Room:** Provided local data storage and offline data management
 
-
-
-
-## 🛠️ key points
 ---
-- **Material 3 UI** for a modern and responsive design
-- **Better error handling** using `Result` wrappers
-- **Adaptive background blur** with stunning blur and glow effects
-- **Adaptive background blur** with stunning background blur and glow effects
-- **Image preloading** with Coil for faster and smoother performance
-- **Enhanced dark mode** support with improved color schemes
-- **Shimmer effect** for loading states
-- **Additional UI/UX refinements** for a polished look and feel
-- **Responsive design** that works seamlessly on tablets and all screen sizes
 
-
-
-
-
-
-# **Screenshots**  
+# **Key Features**
 ---
-| Main Feed Screen                  | Search Screen                     | Bookmarks Screen                  |
-|-----------------------------------|------------------------------------|------------------------------------|
-| <img width="160" src="./readme-assets/2.gif"> | <img width="160" src="./readme-assets/7.gif"> | <img width="160" src="./readme-assets/8.gif"> |
-| Profile (WebView)                 | Preview Image                      | Zoom Image                         |
-| <img width="160" src="./readme-assets/6.gif"> | <img width="160" src="./readme-assets/3.gif"> | <img width="160" src="./readme-assets/4.gif"> |
 
-# 📥 Download  
+- Modern and responsive **Material 3 UI**
+- Smooth **infinite scrolling** with Paging 3
+- Efficient image loading and **preloading** with Coil
+- **Adaptive background blur** with subtle glow effects
+- Improved **dark mode** with optimized color schemes
+- **Shimmer loading effects** for a smoother user experience
+- Robust **error handling** using `Result`
+- Responsive layouts optimized for different screen sizes
+- Clean and polished **UI/UX**
+- Local data persistence with Room
+- Seamless screen navigation with Compose Navigation
+
 ---
+
+# **Screenshots**
+---
+
+| | | | |
+|---|---|---|---|
+| <img width="180" src="https://raw.githubusercontent.com/androidwithabhishek/my-res/main/image_search/1.jpeg"> | <img width="180" src="https://raw.githubusercontent.com/androidwithabhishek/my-res/main/image_search/2.jpeg"> | <img width="180" src="https://raw.githubusercontent.com/androidwithabhishek/my-res/main/image_search/3.jpeg"> | <img width="180" src="https://raw.githubusercontent.com/androidwithabhishek/my-res/main/image_search/4.jpeg"> |
+
+---
+
+# **📥 Download**
+---
+
 [![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](./readme-assets/app-release.apk)
-
----
-
-
-
-
