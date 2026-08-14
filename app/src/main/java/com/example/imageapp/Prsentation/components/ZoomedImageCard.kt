@@ -14,10 +14,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,61 +32,90 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import coil3.compose.AsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.example.imageapp.domain.model.UnsplashImage
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.placeholder
+import com.google.accompanist.placeholder.shimmer
 import com.skydoves.cloudy.cloudy
 
 
-@Composable fun ZoomedImageCard(images: UnsplashImage?, isVisibility: Boolean)
-{
-    val imageRequest =
-            ImageRequest.Builder(LocalContext.current).data(images?.imageUrlRaw).crossfade(true)
-                .build()
-    if (isVisibility)
-    {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            // Background with blur effect
-            Box(modifier = Modifier
-                .cloudy(radius = 25)
-                .fillMaxSize()
+@Composable
+fun ZoomedImageCard(image: UnsplashImage?, isVisibility: Boolean) {
 
-                // Official Blur Modifier
-                .background(Color.Black.copy(alpha = 0.8f)) // Optional: Dim effect
-            )
+    val context = LocalContext.current
 
-            // Card with Image (No blur applied)
+    val imageRequest = remember(image) {
+        ImageRequest.Builder(context)
+            .data(image?.imageUrlRegular)
+            .crossfade(true)
+            .build()
+    }
+
+    val photographerImageUrlLarge = remember(image) {
+        ImageRequest.Builder(context)
+            .data(image?.photographerImageUrl?.substringBefore("?"))
+            .crossfade(true)
+            .build()
+    }
+
+    if (isVisibility) {
+        Box(modifier = Modifier.fillMaxSize().background(color = Color.Transparent), contentAlignment = Alignment.Center) {
 
 
-            AnimatedVisibility(isVisibility,
-                               enter = scaleIn() + fadeIn(),
-                               exit = scaleOut() + fadeOut()) {
-                Card(modifier = Modifier.padding(16.dp) // Optional for spacing
+            AnimatedVisibility(
+                isVisibility,
+                enter = scaleIn() + fadeIn(),
+                exit = scaleOut() + fadeOut()
+            ) {
+                Card(
+                    modifier = Modifier.padding(16.dp).background(color = Color.Transparent)
                 ) {
 
-                    Row(modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().background(color = Color.Transparent),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
 
-
-                        val photographerImageUrlLarge: String? =
-                                images?.photographerImageUrl?.substringBefore("?")
-                        AsyncImage(model = photographerImageUrlLarge,
-                                   contentDescription = null,
-
-                                   modifier = Modifier
-                                       .padding(10.dp)
-                                       .clip(CircleShape)
-                                       .size(34.dp),
-                                   contentScale = ContentScale.Crop)
-                        Text(text = images?.photographerName ?: "No Name",
-                             style = MaterialTheme.typography.labelLarge,
-                             fontSize = 18.sp)
+                        AsyncImage(
+                            model = photographerImageUrlLarge,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(10.dp)
+                                .clip(CircleShape)
+                                .size(34.dp),
+                            contentScale = ContentScale.Crop
+                        )
+                        Text(
+                            text = image?.photographerName ?: "No Name",
+                            style = MaterialTheme.typography.labelLarge,
+                            fontSize = 18.sp
+                        )
 
 
                     }
-                    AsyncImage(model = imageRequest,
-                               contentDescription = null,
-                               modifier = Modifier.fillMaxWidth())
+                    var isLoading by remember { mutableStateOf(true) }
+
+                    AsyncImage(
+                        model = imageRequest,
+                        onState = {
+                            isLoading = it is AsyncImagePainter.State.Loading
+                        },
+                        modifier = Modifier.placeholder(
+                            visible = isLoading,
+                            highlight = PlaceholderHighlight.shimmer(
+                                highlightColor = Color.White.copy(
+                                    alpha = 0.6f
+                                )
+                            ),
+                            color = Color.Gray.copy(alpha = 0.2f),
+                            shape = RoundedCornerShape(10.dp)
+                        ).fillMaxWidth(),
+                        contentDescription = null,
+
+                    )
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.example.imageapp.data.remote.dto2
+package com.example.imageapp.data.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -29,8 +29,10 @@ data class UserDto(val links: UsersLinksDto,
 data class ProfileImage(val small: String)
 
 @Serializable
-data class UsersLinksDto(val html: String,
-                         val likes: String,
-                         val photos: String,
-                         val portfolio: String,
-                         val self: String)
+data class UsersLinksDto(
+    val self: String? = null,
+    val html: String? = null,
+    val photos: String? = null,
+    val likes: String? = null,
+    val portfolio: String? = null
+)

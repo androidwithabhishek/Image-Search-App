@@ -115,9 +115,6 @@ fun FullImageScreen(
 
     }
 
-
-
-
     DownLoadBottomSheet(
         onDismissRequest = { isDownloadBottomSheetOpen = false },
         sheetState = sheetState,

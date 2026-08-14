@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -14,7 +16,9 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
@@ -37,6 +41,7 @@ import androidx.navigation.NavHostController
 import androidx.paging.compose.LazyPagingItems
 import com.example.imageapp.Prsentation.components.ImageVerticalGrid
 import com.example.imageapp.Prsentation.components.ZoomedImageCard
+import com.example.imageapp.Prsentation.components.blured.BlurredImageVerticalGrid
 import com.example.imageapp.domain.model.UnsplashImage
 import com.example.imageapp.utils.SnackBarEvent
 import kotlinx.coroutines.CoroutineScope
@@ -46,7 +51,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 
-@OptIn(ExperimentalMaterial3Api::class) @Composable
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
 fun SearchScreen(
 
     snackbarHostState: SnackbarHostState,
@@ -54,14 +60,13 @@ fun SearchScreen(
     snackbarEvent: Flow<SnackBarEvent>,
     scrollBehavior: TopAppBarScrollBehavior,
     images: LazyPagingItems<UnsplashImage>,
-    favoriteImageIDs : List<String>,
+    favoriteImageIDs: List<String>,
     onBackClick: () -> Unit = { navHostController.navigateUp() },
     onSearch: (String) -> Unit,
-    onImageClick: (String,Int) -> Unit,
-    toggleFavoriteStatus :(UnsplashImage)->Unit
+    onImageClick: (String, Int) -> Unit,
+    toggleFavoriteStatus: (UnsplashImage) -> Unit,
 
-)
-{
+    ) {
 
     val focusRequester = remember { FocusRequester() }
     val foucusManager = LocalFocusManager.current
@@ -83,8 +88,25 @@ fun SearchScreen(
 
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.fillMaxSize(),
-               horizontalAlignment = Alignment.CenterHorizontally) {
+        BlurredImageVerticalGrid(
+            images = images,
+            onImageClick = onImageClick,
+            favoriteImageIDs = favoriteImageIDs,
+
+            onImageDragStart = { image ->
+                activeImage = image
+                showImagePreview = true
+            },
+            onImageDragEnd = { showImagePreview = false },
+
+            onFevClick = { toggleFavoriteStatus(it) },
+            isFev = false,
+        )
+
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             var query by remember { mutableStateOf("") }
 
             LaunchedEffect(Unit) {
@@ -93,61 +115,68 @@ fun SearchScreen(
 
             }
 
-            SearchBar(modifier = Modifier
-                .focusRequester(focusRequester)
-                .onFocusChanged {
-                    isSugsetionVisible = it.isFocused
+            SearchBar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp, end = 8.dp)
+                    .focusRequester(focusRequester)
+                    .onFocusChanged {
+                        isSugsetionVisible = it.isFocused
+                    },
+                query = query,
+                onQueryChange = { query = it },
+                onSearch = {
+                    onSearch(query)
+                    keyboardController?.hide()
+                    foucusManager.clearFocus()
+
                 },
-                      query = query,
-                      onQueryChange = { query = it },
-                      onSearch = {
-                          onSearch(query)
-                          keyboardController?.hide()
-                          foucusManager.clearFocus()
+                active = false,
+                colors = SearchBarDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.surface.copy(
+                        alpha = 0.65f
+                    )
+                ),
+                onActiveChange = {},
+                placeholder = { Text("Search") },
+                trailingIcon = {
 
-                      },
-                      active = false,
-                      onActiveChange = {},
-                      placeholder = { Text("Search") },
-                      trailingIcon = {
+                    IconButton(onClick = {
+                        if (query.isNotEmpty()) {
+                            query = ""
+                            foucusManager.clearFocus()
+                        } else {
+                            foucusManager.clearFocus()
+                            CoroutineScope(Dispatchers.Main).launch {
+                                delay(1000)
+                                onBackClick()
+                            }
+                        }
+                    }) {
+                        Icon(imageVector = Icons.Filled.Close, contentDescription = "close")
+                    }
 
-                          IconButton(onClick = {
-                              if (query.isNotEmpty())
-                              {
-                                  query = ""
-                                  foucusManager.clearFocus()
-                              }
-                              else
-                              {
-                                  foucusManager.clearFocus()
-                                  CoroutineScope(Dispatchers.Main).launch {
-                                      delay(1000)
-                                      onBackClick()
-                                  }
-                              }
-                          }) {
-                              Icon(imageVector = Icons.Filled.Close, contentDescription = "close")
-                          }
-
-                      },
-                      leadingIcon = {
-                          Icon(imageVector = Icons.Default.Search, contentDescription = "search")
-                      }) {}
+                },
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+                }) {}
 
 
             AnimatedVisibility(visible = isSugsetionVisible) {
-                LazyRow(contentPadding = PaddingValues(horizontal = 10.dp),
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = 10.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
                     items(searchKeywords) { item: String ->
                         SuggestionChip(
-                                onClick = {
-                                    query = item
-                                    keyboardController?.hide()
-                                    foucusManager.clearFocus()
-                                    onSearch(query)
-                                },
-                                label = { Text(text = item) },
-                                modifier = Modifier,
+                            onClick = {
+                                query = item
+                                keyboardController?.hide()
+                                foucusManager.clearFocus()
+                                onSearch(query)
+                            },
+                            label = { Text(text = item) },
+                            modifier = Modifier,
                         )
 
                     }
@@ -156,49 +185,52 @@ fun SearchScreen(
             }
 
 
-//
+
+
             ImageVerticalGrid(
-                    images = images,
-                    onImageClick = onImageClick,
-                    favoriteImageIDs = favoriteImageIDs,
+                images = images,
+                onImageClick = onImageClick,
+                favoriteImageIDs = favoriteImageIDs,
 
-                    onImageDragStart = { image ->
-                        activeImage = image
-                        showImagePreview = true
-                    },
-                    onImageDragEnd = { showImagePreview = false },
+                onImageDragStart = { image ->
+                    activeImage = image
+                    showImagePreview = true
+                },
+                onImageDragEnd = { showImagePreview = false },
 
-                    onFevClick = { toggleFavoriteStatus(it) },
-                    isFev = false,
+                onFevClick = { toggleFavoriteStatus(it) },
+                isFev = false,
 
 
-            )
+                )
 
         }
-        ZoomedImageCard(images = activeImage, isVisibility = showImagePreview)
+        ZoomedImageCard(image = activeImage, isVisibility = showImagePreview)
 
 
     }
 
 }
 
-val searchKeywords: List<String> = listOf("Landscape",
-                                          "Portrait",
-                                          "Nature",
-                                          "Architecture",
-                                          "Travel",
-                                          "Food",
-                                          "Animals",
-                                          "Abstract",
-                                          "Technology",
-                                          "Fashion",
-                                          "Sports",
-                                          "Fitness",
-                                          "Music",
-                                          "Art",
-                                          "City",
-                                          "Culture",
-                                          "Vintage",
-                                          "Wellness",
-                                          "Education",
-                                          "Business")
+val searchKeywords: List<String> = listOf(
+    "Landscape",
+    "Portrait",
+    "Nature",
+    "Architecture",
+    "Travel",
+    "Food",
+    "Animals",
+    "Abstract",
+    "Technology",
+    "Fashion",
+    "Sports",
+    "Fitness",
+    "Music",
+    "Art",
+    "City",
+    "Culture",
+    "Vintage",
+    "Wellness",
+    "Education",
+    "Business"
+)

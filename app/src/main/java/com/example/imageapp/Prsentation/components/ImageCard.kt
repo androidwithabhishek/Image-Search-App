@@ -52,10 +52,7 @@ import com.google.accompanist.placeholder.shimmer
 
 
 
-//
-//    val imageRequest =
-//            ImageRequest.Builder(LocalContext.current).data(image?.imageUrlSmall).crossfade(true)
-//                .build()
+
 
 
 
@@ -67,7 +64,7 @@ import com.google.accompanist.placeholder.shimmer
 
     val imageRequest = remember(image) {
         ImageRequest.Builder(context)
-            .data(image?.imageUrlSmall)
+            .data(image?.imageUrlRegular)
             .crossfade(true)
             .build()
     }
@@ -85,13 +82,7 @@ import com.google.accompanist.placeholder.shimmer
 
 
 
-//            AsyncImage(model = imageRequest,
-//                       contentDescription = null,
-//                       modifier = Modifier.fillMaxSize(),
-//                       contentScale = ContentScale.FillBounds)
 
-
-//            val painter = rememberAsyncImagePainter(model = imageRequest)
 
             var isLoading by remember { mutableStateOf(true) }
 

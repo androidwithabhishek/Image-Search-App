@@ -1,0 +1,102 @@
+package com.example.imageapp.Prsentation.components.blured
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
+import coil3.compose.AsyncImagePainter
+import coil3.compose.rememberAsyncImagePainter
+import coil3.request.ImageRequest
+import coil3.request.crossfade
+import com.example.imageapp.Prsentation.components.FavButton
+import com.example.imageapp.domain.model.UnsplashImage
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.placeholder
+import com.google.accompanist.placeholder.shimmer
+
+
+@Composable
+fun  BluerImageCard (modifier: Modifier = Modifier,
+                     image: UnsplashImage?,
+                     onFevClick: () -> Unit,
+                     isFev: Boolean) {
+    val context = LocalContext.current
+
+
+
+
+
+
+
+
+    val aspectRatio: Float by remember {
+        derivedStateOf {
+            (image?.width?.toFloat() ?: 1f) / (image?.height?.toFloat() ?: 1f)
+        }
+    }
+
+    val imageRequest = remember(image) {
+        ImageRequest.Builder(context)
+            .data(image?.imageUrlSmall)
+            .crossfade(true)
+            .build()
+    }
+
+    val painter = rememberAsyncImagePainter(model = imageRequest)
+
+
+    Card(shape = RoundedCornerShape(10.dp),
+    modifier = Modifier
+    .fillMaxSize()
+    .aspectRatio(aspectRatio)
+    .then(modifier)) {
+
+        Box{
+
+
+
+
+            var isLoading by remember { mutableStateOf(true) }
+
+
+            AsyncImage(
+                model = imageRequest,
+                contentDescription = null,
+                onState = {
+                    isLoading = it is AsyncImagePainter.State.Loading
+                },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .placeholder(
+                        visible = isLoading,
+                        highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White.copy(alpha = 0.6f)),
+                        color = Color.Gray.copy(alpha = 0.2f),
+                        shape = RoundedCornerShape(10.dp)
+                    ),
+                contentScale = ContentScale.FillBounds
+            )
+
+            FavButton(
+                isFev = isFev,
+                onFevClick = onFevClick,
+                modifier = Modifier.align(Alignment.BottomEnd)
+            )
+
+        }
+
+    }
+}

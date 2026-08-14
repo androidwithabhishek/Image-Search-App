@@ -1,7 +1,7 @@
 package com.example.imageapp.data.remote
 
-import com.example.imageapp.data.remote.dto2.UnsplashImageDto
-import com.example.imageapp.data.remote.dto2.UnsplashImageSearchResult
+import com.example.imageapp.data.remote.dto.UnsplashImageDto
+import com.example.imageapp.data.remote.dto.UnsplashImageSearchResult
 import com.example.imageapp.data.utils.Constants.API_KEY
 import retrofit2.http.GET
 import retrofit2.http.Headers

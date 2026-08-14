@@ -38,6 +38,7 @@ foundationLayoutAndroid = "1.7.6"
 pagingComposeAndroid = "3.3.6"
 identityCredential = "20231002"
 webkit = "1.13.0"
+media3Exoplayer = "1.11.0"
 
 [libraries]
 accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanistPlaceholderMaterial" }
@@ -92,6 +93,7 @@ androidx-runner = { group = "androidx.test", name = "runner", version.ref = "run
 androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
 androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
 identity-credential = { group = "com.android.identity", name = "identity-credential", version.ref = "identityCredential" }
+androidx-media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3Exoplayer" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

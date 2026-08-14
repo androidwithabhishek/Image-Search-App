@@ -3,7 +3,7 @@ package com.example.imageapp.data.maper
 import com.example.imageapp.data.local.entity.FavoriteImageEntity
 import com.example.imageapp.data.local.entity.UnsplashImageEntity
 
-import com.example.imageapp.data.remote.dto2.UnsplashImageDto
+import com.example.imageapp.data.remote.dto.UnsplashImageDto
 import com.example.imageapp.domain.model.UnsplashImage
 
 fun UnsplashImageDto.toDomainModel(): UnsplashImage
@@ -15,7 +15,7 @@ fun UnsplashImageDto.toDomainModel(): UnsplashImage
                          photographerName = this.user.name,
                          photographerUsername = this.user.username,
                          photographerImageUrl = this.user.profileImage.small,
-                         photographerProfileFileLink = this.user.links.html,
+                         photographerProfileFileLink = this.user.links.html?:"",
                          width = this.width,
                          height = this.height,
                          description = this.description ?: "")
@@ -91,7 +91,7 @@ fun UnsplashImageDto.toEntity(): UnsplashImageEntity {
             photographerName = this.user.name,
             photographerUsername = this.user.username,
             photographerProfileImgUrl = this.user.profileImage.small,
-            photographerProfileLink = this.user.links.html,
+            photographerProfileLink = this.user.links.html?:"",
             width = this.width,
             height = this.height,
             description = description

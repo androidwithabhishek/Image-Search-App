@@ -1,6 +1,7 @@
 package com.example.imageapp.Prsentation.fevScreen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,6 +31,7 @@ import androidx.paging.compose.LazyPagingItems
 import com.example.imageapp.Prsentation.components.HomeTopAppBar
 import com.example.imageapp.Prsentation.components.ImageVerticalGrid
 import com.example.imageapp.Prsentation.components.ZoomedImageCard
+import com.example.imageapp.Prsentation.components.blured.BlurredImageVerticalGrid
 import com.example.imageapp.R
 import com.example.imageapp.domain.model.UnsplashImage
 import com.example.imageapp.utils.SnackBarEvent
@@ -38,19 +40,20 @@ import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FevScreen(modifier: Modifier = Modifier,
-              snackbarHostState: SnackbarHostState,
-              navHostController: NavHostController,
-              snackbarEvent: Flow<SnackBarEvent>,
-              scrollBehavior: TopAppBarScrollBehavior,
-              images: LazyPagingItems<UnsplashImage>,
-              favoriteImageIDs: List<String>,
-              onBackClick: () -> Unit = { navHostController.navigateUp() },
+fun FevScreen(
+    modifier: Modifier = Modifier,
+    snackbarHostState: SnackbarHostState,
+    navHostController: NavHostController,
+    snackbarEvent: Flow<SnackBarEvent>,
+    scrollBehavior: TopAppBarScrollBehavior,
+    images: LazyPagingItems<UnsplashImage>,
+    favoriteImageIDs: List<String>,
+    onBackClick: () -> Unit = { navHostController.navigateUp() },
 
-              onImageClick: (String,Int) -> Unit,
-              toggleFavoriteStatus: (UnsplashImage) -> Unit,
-              onSearchClick: () -> Unit)
-{
+    onImageClick: (String, Int) -> Unit,
+    toggleFavoriteStatus: (UnsplashImage) -> Unit,
+    onSearchClick: () -> Unit,
+) {
 
 
     var showImagePreview by remember { mutableStateOf(false) }
@@ -62,16 +65,43 @@ fun FevScreen(modifier: Modifier = Modifier,
             snackbarHostState.showSnackbar(message = event.message, duration = event.duration)
         }
     }
+    Box(modifier = Modifier.fillMaxSize()) {
 
 
-Column {
 
 
-        HomeTopAppBar(TopAppBarScrollBehavior = scrollBehavior,
-                      title = "Favorite",
-                      onSearchClick = onSearchClick)
-//
-        ImageVerticalGrid(
+
+
+
+
+
+
+
+        BlurredImageVerticalGrid(
+            images = images,
+            onImageClick = onImageClick,
+            favoriteImageIDs = favoriteImageIDs,
+
+            onImageDragStart = { image ->
+                activeImage = image
+                showImagePreview = true
+            },
+            onImageDragEnd = { showImagePreview = false },
+
+            onFevClick = { toggleFavoriteStatus(it) },
+            isFev = false,
+        )
+
+
+        Column {
+
+            HomeTopAppBar(
+                topAppBarScrollBehavior = scrollBehavior,
+                title = "Favorite",
+                onSearchClick = onSearchClick
+            )
+
+            ImageVerticalGrid(
                 images = images,
                 onImageClick = onImageClick,
                 favoriteImageIDs = favoriteImageIDs,
@@ -86,17 +116,21 @@ Column {
                 isFev = false,
 
 
-        )
+                )
 
-    }
+        }
 
-    ZoomedImageCard(images = activeImage, isVisibility = showImagePreview)
+        ZoomedImageCard(image = activeImage, isVisibility = showImagePreview)
 
-    if (images.itemCount == 0)
-    {
-        EmptyState(modifier=Modifier
-            .fillMaxSize()
-            .padding(16.dp))
+        if (images.itemCount == 0) {
+            EmptyState(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+            )
+        }
+
+
     }
 
 
@@ -104,23 +138,30 @@ Column {
 
 
 @Composable
-private fun EmptyState(modifier: Modifier = Modifier)
-{
-    Column(modifier = modifier,
-           verticalArrangement = Arrangement.Center,
-           horizontalAlignment = Alignment.CenterHorizontally) {
-        Icon(modifier = Modifier.fillMaxWidth(),
-             painter = painterResource(id = R.drawable.baseline_hourglass_empty_24),
-             contentDescription = null)
+private fun EmptyState(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            modifier = Modifier.fillMaxWidth(),
+            painter = painterResource(id = R.drawable.baseline_hourglass_empty_24),
+            contentDescription = null
+        )
         Spacer(modifier = Modifier.height(48.dp))
-        Text(text = "No Saved Images",
-             modifier = Modifier.fillMaxWidth(),
-             textAlign = TextAlign.Center,
-             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
+        Text(
+            text = "No Saved Images",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+        )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "Images you save will be stored here",
-             modifier = Modifier.fillMaxWidth(),
-             textAlign = TextAlign.Center,
-             style = MaterialTheme.typography.bodyMedium)
+        Text(
+            text = "Images you save will be stored here",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }

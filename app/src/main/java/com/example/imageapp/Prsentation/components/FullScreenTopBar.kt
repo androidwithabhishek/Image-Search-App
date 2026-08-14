@@ -5,6 +5,8 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,12 +25,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -47,38 +51,80 @@ import com.example.imageapp.domain.model.UnsplashImage
 @Composable
 fun HomeTopAppBar(
     modifier: Modifier = Modifier,
-    TopAppBarScrollBehavior: TopAppBarScrollBehavior,
+    topAppBarScrollBehavior: TopAppBarScrollBehavior,
     title: String,
     onSearchClick: () -> Unit
 ) {
-    CenterAlignedTopAppBar(
-        scrollBehavior = TopAppBarScrollBehavior,
+    TopAppBar(
+        modifier = modifier,
+        scrollBehavior = topAppBarScrollBehavior,
+
         title = {
-            Text(text = buildAnnotatedString {
-                withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
-                    append(title.split(title).first())
-                }
-                withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.secondary)) {
-                    append(title.split(" ").last())
-                }
-            }, fontWeight = FontWeight.ExtraBold, fontSize = 30.sp)
+            val words = title.trim().split(" ")
+
+            Text(
+                text = buildAnnotatedString {
+
+                    words.forEachIndexed { index, word ->
+
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color.White.copy(
+                                    alpha = 0.8f
+                                ),
+                            )
+                        ) {
+                            append(word)
+                        }
+
+                        if (index < words.lastIndex) {
+                            append(" ")
+                        }
+                    }
+                },
+                fontSize = 27.sp,
+                fontWeight = FontWeight.ExtraBold,
+                letterSpacing = (-0.5).sp
+            )
         },
+
         actions = {
-            IconButton(onClick = {
-                onSearchClick()
 
-
-            }) {
+            Box(
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .size(44.dp)
+                    .clip(CircleShape)
+                    .background(
+                        MaterialTheme.colorScheme.surface.copy(
+                            alpha = 0.65f
+                        )
+                    )
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.onSurface.copy(
+                            alpha = 0.08f
+                        ),
+                        shape = CircleShape
+                    )
+                    .clickable {
+                        onSearchClick()
+                    },
+                contentAlignment = Alignment.Center
+            ) {
 
                 Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = null
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Search",
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.size(22.dp)
                 )
-
             }
         },
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            scrolledContainerColor = MaterialTheme.colorScheme.background
+
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Transparent,
+            scrolledContainerColor = Color.Transparent
         )
     )
 }
