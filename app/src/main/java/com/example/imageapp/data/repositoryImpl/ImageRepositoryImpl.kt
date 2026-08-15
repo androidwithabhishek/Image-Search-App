@@ -7,19 +7,18 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.example.imageapp.data.local.database.ImageVistaDatabase
 import com.example.imageapp.data.maper.toDomainModel
-import com.example.imageapp.data.maper.toDomainModelList
 import com.example.imageapp.data.maper.toFavoriteImageEntity
 import com.example.imageapp.data.remote.UnsplashApiService
 import com.example.imageapp.data.serchPagingSource.EditorialFeedRemoteMediator
 import com.example.imageapp.data.utils.Constants.ITEMS_PER_PAGE
 import com.example.imageapp.data.serchPagingSource.SearchPagingSource
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.domain.repository.ImageRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class ImplementationImageRepository(private val unsplashApi: UnsplashApiService,
-                                    private val database: ImageVistaDatabase) : ImageRepository
+class ImageRepositoryImpl(private val unsplashApi: UnsplashApiService,
+                          private val database: ImageVistaDatabase) : ImageRepository
 {
 
 
@@ -28,7 +27,7 @@ class ImplementationImageRepository(private val unsplashApi: UnsplashApiService,
 
 
     @OptIn(ExperimentalPagingApi::class)
-    override fun getEditorialFeedImage(): Flow<PagingData<UnsplashImage>>
+    override fun getEditorialFeedImage(): Flow<PagingData<DomainUnsplashImage>>
     {
         return Pager(config = PagingConfig(pageSize = ITEMS_PER_PAGE),
                      remoteMediator = EditorialFeedRemoteMediator(unsplashApi,database),
@@ -40,19 +39,19 @@ class ImplementationImageRepository(private val unsplashApi: UnsplashApiService,
         }
     }
 
-    override suspend fun getImage(imageId: String): UnsplashImage
+    override suspend fun getImage(imageId: String): DomainUnsplashImage
     {
         return unsplashApi.getImage(imageId).toDomainModel()
     }
 
-    override suspend fun searchImages(query: String): Flow<PagingData<UnsplashImage>>
+    override suspend fun searchImages(query: String): Flow<PagingData<DomainUnsplashImage>>
     {
         return Pager(config = PagingConfig(pageSize = ITEMS_PER_PAGE), pagingSourceFactory = {
             SearchPagingSource(query = query, unsplashApi)
         }).flow
     }
 
-    override suspend fun toggleFavoriteStatus(image: UnsplashImage)
+    override suspend fun toggleFavoriteStatus(image: DomainUnsplashImage)
     {
         val isFavorite = favoriteImagesDao.isImageFavorite(id = image.id)
 
@@ -76,7 +75,14 @@ class ImplementationImageRepository(private val unsplashApi: UnsplashApiService,
         return favoriteImagesDao.getFavoriteImageIds()
     }
 
-    override fun getAllFavImages(): Flow<PagingData<UnsplashImage>>
+
+
+
+
+
+
+
+    override fun getAllFavPagingImages(): Flow<PagingData<DomainUnsplashImage>>
     {
         return Pager(config = PagingConfig(pageSize = ITEMS_PER_PAGE), pagingSourceFactory = {
             favoriteImagesDao.getAllFavoriteImages()
@@ -84,4 +90,7 @@ class ImplementationImageRepository(private val unsplashApi: UnsplashApiService,
                 pagingData.map { it.toDomainModel() }
             }
     }
+
+
+
 }

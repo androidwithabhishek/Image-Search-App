@@ -40,12 +40,10 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RenderEffect
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.CachePolicy
@@ -54,7 +52,7 @@ import coil3.request.crossfade
 import com.example.imageapp.Prsentation.components.DownLoadBottomSheet
 import com.example.imageapp.Prsentation.components.FullScreenTopBar
 import com.example.imageapp.Prsentation.components.ImageDownloadOption
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.utils.SnackBarEvent
 import com.example.imageapp.utils.rememberWindowInsetsController
 import com.example.imageapp.utils.toggleStatusBars
@@ -70,7 +68,7 @@ fun FullImageScreen(
 
     snackBarHostState: SnackbarHostState,
     snackBarEvent: Flow<SnackBarEvent>,
-    imageClass: UnsplashImage?,
+    imageClass: DomainUnsplashImage?,
     onBackClick: () -> Unit,
     onPhotographerNameClick: (String) -> Unit,
     OnImageDownloadClick: (String, String?) -> Unit

@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.imageapp.domain.model.NetworkStatus
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.domain.repository.ImageRepository
 import com.example.imageapp.domain.repository.NetworkConnectivityObserver
 import com.example.imageapp.utils.SnackBarEvent
@@ -30,8 +30,8 @@ import javax.inject.Inject
     private val _snackbarEvent = Channel<SnackBarEvent>()
     val snackbarEvent = _snackbarEvent.receiveAsFlow()
 
-    private val _images = MutableStateFlow(PagingData.empty<UnsplashImage>())
-    var images: StateFlow<PagingData<UnsplashImage>> = _images
+    private val _images = MutableStateFlow(PagingData.empty<DomainUnsplashImage>())
+    var images: StateFlow<PagingData<DomainUnsplashImage>> = _images
 
     init
     {
@@ -81,7 +81,10 @@ import javax.inject.Inject
                               started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
                               initialValue = emptyList())
 
-            fun toggleFavoriteStatus(image: UnsplashImage)
+
+
+
+            fun toggleFavoriteStatus(image: DomainUnsplashImage)
             {
 
                 viewModelScope.launch {

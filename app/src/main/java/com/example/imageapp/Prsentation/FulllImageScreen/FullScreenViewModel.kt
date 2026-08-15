@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.imageapp.Prsentation.navigarion.Routes
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.domain.repository.Downloader
 import com.example.imageapp.domain.repository.ImageRepository
 import com.example.imageapp.utils.SnackBarEvent
@@ -32,7 +32,7 @@ class FullScreenViewModel @Inject constructor(
 
 
     private val imageId = savedStateHandle.toRoute<Routes.FullScreen>().imageId
-    var image: UnsplashImage? by mutableStateOf(null)
+    var image: DomainUnsplashImage? by mutableStateOf(null)
         private set
 
     init {

@@ -7,7 +7,7 @@ import com.example.imageapp.data.remote.UnsplashApiService
 import com.example.imageapp.data.utils.Constants.BASE_URL
 import com.example.imageapp.data.utils.Constants.IMAGE_VISTA_DATABASE
 import com.example.imageapp.data.repositoryImpl.ImplAndroidImageDownloader
-import com.example.imageapp.data.repositoryImpl.ImplementationImageRepository
+import com.example.imageapp.data.repositoryImpl.ImageRepositoryImpl
 import com.example.imageapp.data.repositoryImpl.NetworkConnectivityObserverImpl
 import com.example.imageapp.domain.repository.Downloader
 import com.example.imageapp.domain.repository.ImageRepository
@@ -29,6 +29,12 @@ import javax.inject.Singleton
 
 @Module @InstallIn(SingletonComponent::class) object AppModule
 {
+    @Provides
+    @Singleton
+    fun provideApplicationScope(): CoroutineScope
+    {
+        return CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    }
 
 
     @Provides
@@ -59,7 +65,7 @@ import javax.inject.Singleton
     fun provideImageRepository(apiService: UnsplashApiService,
                                database: ImageVistaDatabase): ImageRepository
     {
-        return ImplementationImageRepository(apiService, database)
+        return ImageRepositoryImpl(apiService, database)
     }
 
     @Provides
@@ -70,12 +76,6 @@ import javax.inject.Singleton
         return ImplAndroidImageDownloader(context)
     }
 
-    @Provides
-    @Singleton
-    fun provideApplicationScope(): CoroutineScope
-    {
-        return CoroutineScope(SupervisorJob() + Dispatchers.Default)
-    }
 
     @Provides
     @Singleton

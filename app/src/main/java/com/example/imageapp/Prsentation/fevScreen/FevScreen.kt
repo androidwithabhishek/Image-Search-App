@@ -33,7 +33,7 @@ import com.example.imageapp.Prsentation.components.ImageVerticalGrid
 import com.example.imageapp.Prsentation.components.ZoomedImageCard
 import com.example.imageapp.Prsentation.components.blured.BlurredImageVerticalGrid
 import com.example.imageapp.R
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.utils.SnackBarEvent
 import kotlinx.coroutines.flow.Flow
 
@@ -46,18 +46,18 @@ fun FevScreen(
     navHostController: NavHostController,
     snackbarEvent: Flow<SnackBarEvent>,
     scrollBehavior: TopAppBarScrollBehavior,
-    images: LazyPagingItems<UnsplashImage>,
+    images: LazyPagingItems<DomainUnsplashImage>,
     favoriteImageIDs: List<String>,
     onBackClick: () -> Unit = { navHostController.navigateUp() },
 
     onImageClick: (String, Int) -> Unit,
-    toggleFavoriteStatus: (UnsplashImage) -> Unit,
+    toggleFavoriteStatus: (DomainUnsplashImage) -> Unit,
     onSearchClick: () -> Unit,
 ) {
 
 
     var showImagePreview by remember { mutableStateOf(false) }
-    var activeImage by remember { mutableStateOf<UnsplashImage?>(null) }
+    var activeImage by remember { mutableStateOf<DomainUnsplashImage?>(null) }
 
 
     LaunchedEffect(key1 = true) {

@@ -4,14 +4,14 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.imageapp.data.maper.toDomainModelList
 import com.example.imageapp.data.remote.UnsplashApiService
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 
 class SearchPagingSource(private val query: String,
                          private val unsplashApiService: UnsplashApiService) :
-    PagingSource<Int, UnsplashImage>()
+    PagingSource<Int, DomainUnsplashImage>()
 {
 
-    override fun getRefreshKey (state : PagingState<Int, UnsplashImage>): Int?
+    override fun getRefreshKey (state : PagingState<Int, DomainUnsplashImage>): Int?
     {
         return state.anchorPosition
     }
@@ -21,7 +21,7 @@ class SearchPagingSource(private val query: String,
         private const val STARTING_PAGE_INDEX = 1
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UnsplashImage>
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DomainUnsplashImage>
     {
         val currentPage = params.key ?: STARTING_PAGE_INDEX
 

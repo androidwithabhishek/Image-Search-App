@@ -23,7 +23,7 @@ import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.example.imageapp.Prsentation.components.FavButton
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.shimmer
@@ -31,7 +31,7 @@ import com.google.accompanist.placeholder.shimmer
 
 @Composable
 fun  BluerImageCard (modifier: Modifier = Modifier,
-                     image: UnsplashImage?,
+                     image: DomainUnsplashImage?,
                      onFevClick: () -> Unit,
                      isFev: Boolean) {
     val context = LocalContext.current

@@ -11,22 +11,20 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.example.imageapp.Prsentation.components.blured.BluerImageCard
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 
 
 @Composable
 fun ImageVerticalGrid(
     modifier: Modifier = Modifier,
-    images: LazyPagingItems<UnsplashImage>,
+    images: LazyPagingItems<DomainUnsplashImage>,
     onImageClick: (imageId: String, index: Int) -> Unit,
-    onImageDragStart: (UnsplashImage?) -> Unit,
+    onImageDragStart: (DomainUnsplashImage?) -> Unit,
     onImageDragEnd: () -> Unit,
-    onFevClick: (UnsplashImage) -> Unit,
+    onFevClick: (DomainUnsplashImage) -> Unit,
     isFev: Boolean = true,
     favoriteImageIDs: List<String>,
 
