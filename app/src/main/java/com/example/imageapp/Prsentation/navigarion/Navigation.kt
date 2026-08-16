@@ -51,10 +51,7 @@ fun Navigation(modifier: Modifier = Modifier,
                     snackbarEvent = viewModel.snackbarEvent,
                     scrollBehavior = topAppBarScrollBehavior,
                     onImageClick = { Imageid, index ->
-
                         navController.navigate(Routes.FullScreen(imageId = Imageid, index = index))
-
-
                     },
 
                     onSearchClick = { navController.navigate(Routes.SearchScreen) },
@@ -62,7 +59,6 @@ fun Navigation(modifier: Modifier = Modifier,
 
                     favoriteImageIDs = favoriteImageIdsHome,
                     toggleFavoriteStatus = {
-
                         viewModel.toggleFavoriteStatus(it)
 
                     },

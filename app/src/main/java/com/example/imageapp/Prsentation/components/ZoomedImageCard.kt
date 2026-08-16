@@ -35,15 +35,14 @@ import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.placeholder
 import com.google.accompanist.placeholder.shimmer
-import com.skydoves.cloudy.cloudy
 
 
 @Composable
-fun ZoomedImageCard(image: UnsplashImage?, isVisibility: Boolean) {
+fun ZoomedImageCard(image: DomainUnsplashImage?, isVisibility: Boolean) {
 
     val context = LocalContext.current
 

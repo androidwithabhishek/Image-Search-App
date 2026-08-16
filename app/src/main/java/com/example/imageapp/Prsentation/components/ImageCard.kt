@@ -3,22 +3,17 @@ package com.example.imageapp.Prsentation.components
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
-import androidx.compose.material3.FilledTonalIconToggleButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -33,18 +28,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
-import coil3.compose.AsyncImagePainter.State.Empty.painter
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
-import com.google.accompanist.placeholder.material.shimmer
 import com.google.accompanist.placeholder.shimmer
 
 @Composable fun ImageCard(modifier: Modifier = Modifier,
-                          image: UnsplashImage?,
+                          image: DomainUnsplashImage?,
                           onFevClick: () -> Unit,
                           isFev: Boolean)
 {
@@ -79,10 +72,6 @@ import com.google.accompanist.placeholder.shimmer
              .then(modifier)) {
 
         Box{
-
-
-
-
 
             var isLoading by remember { mutableStateOf(true) }
 
@@ -124,6 +113,7 @@ fun FavButton(
     onFevClick: () -> Unit
 ) {
     val transition = updateTransition(targetState = isFev, label = "favoriteTransition")
+
     val tint by transition.animateColor(label = "color") { isFavorite ->
         if (isFavorite) Color.Red else Color.Gray
     }

@@ -29,7 +29,7 @@ import com.example.imageapp.Prsentation.components.ImageVerticalGrid
 import com.example.imageapp.Prsentation.components.ZoomedImageCard
 import com.example.imageapp.Prsentation.components.blured.BlurredImageVerticalGrid
 import com.example.imageapp.R
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.utils.SnackBarEvent
 import kotlinx.coroutines.flow.Flow
 
@@ -38,13 +38,12 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun HomeScreen(
     snackbarHostState: SnackbarHostState,
-
     snackbarEvent: Flow<SnackBarEvent>,
     scrollBehavior: TopAppBarScrollBehavior,
-    images: LazyPagingItems<UnsplashImage>,
+    images: LazyPagingItems<DomainUnsplashImage>,
     favoriteImageIDs: List<String>,
     onImageClick: (String, index: Int) -> Unit,
-    toggleFavoriteStatus: (UnsplashImage) -> Unit,
+    toggleFavoriteStatus: (DomainUnsplashImage) -> Unit,
     onSearchClick: () -> Unit,
     onFABClick: () -> Unit,
 
@@ -52,7 +51,7 @@ fun HomeScreen(
     ) {
 
     var showImagePreview by remember { mutableStateOf(false) }
-    var activeImage by remember { mutableStateOf<UnsplashImage?>(null) }
+    var activeImage by remember { mutableStateOf<DomainUnsplashImage?>(null) }
 
 
     LaunchedEffect(key1 = true) {

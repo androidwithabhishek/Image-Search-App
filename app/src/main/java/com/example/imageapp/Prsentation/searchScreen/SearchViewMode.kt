@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.domain.repository.ImageRepository
 import com.example.imageapp.domain.repository.NetworkConnectivityObserver
 import com.example.imageapp.utils.SnackBarEvent
@@ -28,7 +28,7 @@ import javax.inject.Inject
     private val _snackbarEvent = Channel<SnackBarEvent>()
     val snackbarEvent = _snackbarEvent.receiveAsFlow()
 
-    private val _searchImages = MutableStateFlow<PagingData<UnsplashImage>>(PagingData.empty())
+    private val _searchImages = MutableStateFlow<PagingData<DomainUnsplashImage>>(PagingData.empty())
     val searchImages = _searchImages
 
 
@@ -57,7 +57,7 @@ import javax.inject.Inject
                       initialValue = emptyList())
 
 
-    fun toggleFavoriteStatus(image: UnsplashImage)
+    fun toggleFavoriteStatus(image: DomainUnsplashImage)
     {
 
         viewModelScope.launch {

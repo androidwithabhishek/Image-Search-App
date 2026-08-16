@@ -1,8 +1,5 @@
 package com.example.imageapp.Prsentation.components.blured
 
-import com.example.imageapp.Prsentation.components.ImageCard
-
-
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
@@ -19,18 +16,17 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.example.imageapp.Prsentation.components.blured.BluerImageCard
-import com.example.imageapp.domain.model.UnsplashImage
+import com.example.imageapp.domain.model.DomainUnsplashImage
 
 
 @Composable
 fun BlurredImageVerticalGrid(
     modifier: Modifier = Modifier,
-    images: LazyPagingItems<UnsplashImage>,
+    images: LazyPagingItems<DomainUnsplashImage>,
     onImageClick: (imageId: String, index: Int) -> Unit,
-    onImageDragStart: (UnsplashImage?) -> Unit,
+    onImageDragStart: (DomainUnsplashImage?) -> Unit,
     onImageDragEnd: () -> Unit,
-    onFevClick: (UnsplashImage) -> Unit,
+    onFevClick: (DomainUnsplashImage) -> Unit,
     isFev: Boolean = true,
     favoriteImageIDs: List<String>,
 

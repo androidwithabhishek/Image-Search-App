@@ -15,6 +15,7 @@ import com.example.imageapp.data.local.entity.UnsplashRemoteKeys
         version = 1,
         exportSchema = false
 )
+
 abstract class ImageVistaDatabase: RoomDatabase() {
 
     abstract fun favoriteImagesDao(): FavoriteImagesDao
