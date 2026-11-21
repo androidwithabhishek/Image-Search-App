@@ -1,101 +1,82 @@
 [versions]
-accompanistPlaceholderMaterial = "0.35.0-alpha"
-accompanistWebview = "0.31.1-alpha"
-agp = "8.8.2"
-cloudy = "0.2.6"
-coilCompose = "3.1.0"
-coilComposeVersion = "2.7.0"
-converterGson = "2.9.0"
-coreSplashscreen = "1.0.1"
-hiltAndroid = "2.51.1"
-hiltAndroidCompiler = "2.48"
-hiltAndroidVersion = "2.48"
+agp = "8.9.1"
+kotlin = "2.1.20"
+ksp = "2.1.20-2.0.1"
+hilt = "2.56.2"
 hiltNavigationCompose = "1.2.0"
-kotlin = "2.0.0"
-coreKtx = "1.15.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
-kotlinxCoroutinesAndroid = "1.10.1"
-kotlinxCoroutinesCore = "1.10.1"
-kotlinxSerializationJson = "1.6.0"
-kotlinxSerializationJsonVersion = "1.8.0"
-lifecycleRuntimeKtx = "2.8.7"
+composeBom = "2025.05.01"
+coreKtx = "1.16.0"
 activityCompose = "1.10.1"
-composeBom = "2024.04.01"
-navigationCompose = "2.8.9"
+lifecycle = "2.9.0"
+navigationCompose = "2.9.0"
+room = "2.7.1"
+paging = "3.3.6"
+retrofit = "3.0.0"
 okhttp = "4.12.0"
-retrofit2KotlinxSerializationConverter = "1.0.0"
-roomCompiler = "2.5.0"
-roomPaging = "2.6.1"
-squareupRetrofit = "2.9.0"
-animationCoreAndroid = "1.7.6"
-paletteKtx = "1.0.0"
-volley = "1.2.1"
-accessibilityTestFramework = "4.1.1"
-runner = "1.4.0"
-foundationLayoutAndroid = "1.7.6"
-pagingComposeAndroid = "3.3.6"
-identityCredential = "20231002"
+serializationJson = "1.8.1"
+coroutines = "1.10.2"
+coil = "3.2.0"
+splashscreen = "1.0.1"
+cloudy = "0.2.6"
+palette = "1.0.0"
 webkit = "1.13.0"
-media3Exoplayer = "1.11.0"
+accompanistPlaceholder = "0.35.0-alpha"
+junit = "4.13.2"
+junitExt = "1.2.1"
+espresso = "3.6.1"
 
 [libraries]
-accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanistPlaceholderMaterial" }
-accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanistWebview" }
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
-androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltNavigationCompose" }
-androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomPaging" }
-androidx-room-compiler-v250 = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomPaging" }
-androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomPaging" }
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomPaging" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
+androidx-palette-ktx = { module = "androidx.palette:palette-ktx", version.ref = "palette" }
 androidx-webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
-cloudy = { module = "com.github.skydoves:cloudy", version.ref = "cloudy" }
-coil = { module = "io.coil-kt:coil", version.ref = "coilComposeVersion" }
-coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
-coil-kt-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeVersion" }
-coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilCompose" }
-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
-converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "converterGson" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
-hilt-android-compiler-v248 = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
-hilt-android-v248 = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidVersion" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
-kotlinx-serialization-json-v180 = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
+
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+androidx-ui = { module = "androidx.compose.ui:ui" }
+androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+androidx-material3 = { module = "androidx.compose.material3:material3" }
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
+
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-kotlinx-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }
+retrofit-converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
-retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
-squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "squareupRetrofit" }
-androidx-animation-core-android = { group = "androidx.compose.animation", name = "animation-core-android", version.ref = "animationCoreAndroid" }
-androidx-palette-ktx = { group = "androidx.palette", name = "palette-ktx", version.ref = "paletteKtx" }
-volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
-accessibility-test-framework = { group = "com.google.android.apps.common.testing.accessibility.framework", name = "accessibility-test-framework", version.ref = "accessibilityTestFramework" }
-androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
-androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
-androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
-identity-credential = { group = "com.android.identity", name = "identity-credential", version.ref = "identityCredential" }
-androidx-media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3Exoplayer" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serializationJson" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
+
+cloudy = { module = "com.github.skydoves:cloudy", version.ref = "cloudy" }
+accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanistPlaceholder" }
+
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitExt" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

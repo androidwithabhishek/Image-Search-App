@@ -6,13 +6,13 @@ import com.example.imageapp.data.local.database.ImageVistaDatabase
 import com.example.imageapp.data.remote.UnsplashApiService
 import com.example.imageapp.data.utils.Constants.BASE_URL
 import com.example.imageapp.data.utils.Constants.IMAGE_VISTA_DATABASE
-import com.example.imageapp.data.repositoryImpl.ImplAndroidImageDownloader
+import com.example.imageapp.data.repositoryImpl.ImageDownloaderImpl
 import com.example.imageapp.data.repositoryImpl.ImageRepositoryImpl
 import com.example.imageapp.data.repositoryImpl.NetworkConnectivityObserverImpl
-import com.example.imageapp.domain.repository.Downloader
+
+import com.example.imageapp.domain.repository.ImageDownloader
 import com.example.imageapp.domain.repository.ImageRepository
 import com.example.imageapp.domain.repository.NetworkConnectivityObserver
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +24,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Singleton
 
 
@@ -70,10 +71,10 @@ import javax.inject.Singleton
 
     @Provides
     @Singleton
-    fun provideImageDownloader(@ApplicationContext context: Context): Downloader
+    fun provideImageDownloader(@ApplicationContext context: Context):ImageDownloader
     {
 
-        return ImplAndroidImageDownloader(context)
+        return ImageDownloaderImpl(context)
     }
 
 

@@ -1,6 +1,6 @@
 package com.example.imageapp.domain.repository
 
-interface Downloader
+interface ImageDownloader
 {
 
    fun downloadFile(url: String, fileName: String?)

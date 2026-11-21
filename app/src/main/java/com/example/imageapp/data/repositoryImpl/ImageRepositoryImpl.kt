@@ -9,9 +9,9 @@ import com.example.imageapp.data.local.database.ImageVistaDatabase
 import com.example.imageapp.data.maper.toDomainModel
 import com.example.imageapp.data.maper.toFavoriteImageEntity
 import com.example.imageapp.data.remote.UnsplashApiService
-import com.example.imageapp.data.serchPagingSource.EditorialFeedRemoteMediator
+import com.example.imageapp.data.searchpaging.EditorialFeedRemoteMediator
 import com.example.imageapp.data.utils.Constants.ITEMS_PER_PAGE
-import com.example.imageapp.data.serchPagingSource.SearchPagingSource
+import com.example.imageapp.data.searchpaging.SearchPagingSource
 import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.domain.repository.ImageRepository
 import kotlinx.coroutines.flow.Flow
