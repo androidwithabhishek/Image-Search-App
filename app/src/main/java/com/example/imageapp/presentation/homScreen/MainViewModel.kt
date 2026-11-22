@@ -1,11 +1,11 @@
-package com.example.imageapp.presentation.HomeScreen
+package com.example.imageapp.presentation.homScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.imageapp.domain.model.NetworkStatus
 import com.example.imageapp.domain.model.DomainUnsplashImage
+import com.example.imageapp.domain.model.NetworkStatus
 import com.example.imageapp.domain.repository.ImageRepository
 import com.example.imageapp.domain.repository.NetworkConnectivityObserver
 import com.example.imageapp.utils.SnackBarEvent
@@ -28,7 +28,7 @@ class MainViewModel @Inject constructor(
     ViewModel() {
 
 
-    private var isFeedLoaded = false  // 👈 flag to prevent multiple loads
+    private var isFeedLoaded = false
     private val _snackBarEvent = Channel<SnackBarEvent>()
     val snackBarEvent = _snackBarEvent.receiveAsFlow()
 
@@ -45,7 +45,7 @@ class MainViewModel @Inject constructor(
                 status ->
                 when (status) {
                     NetworkStatus.Connected -> {
-                        // Only load if not already loaded
+
                         if (!isFeedLoaded) {
                             getImages()
                         }
@@ -66,7 +66,7 @@ class MainViewModel @Inject constructor(
                 _snackBarEvent.send(SnackBarEvent("Something went wrong: ${exception.message}"))
             }.collect { pagingData ->
                 _images.value = pagingData
-                isFeedLoaded = true // ✅ Mark as loaded
+                isFeedLoaded = true
             }
         }
     }
@@ -90,7 +90,7 @@ class MainViewModel @Inject constructor(
 
 
             } catch (e: Exception) {
-                _snackBarEvent.send(SnackBarEvent(message = "Somthing went worong ${e.message}"))
+                _snackBarEvent.send(SnackBarEvent(message = "Something went wrong ${e.message}"))
             }
         }
     }

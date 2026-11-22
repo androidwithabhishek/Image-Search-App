@@ -1,4 +1,4 @@
-package com.example.imagevista.presentation.full_image_screen
+package com.example.imageapp.presentation.fullImageScreen
 
 import android.annotation.SuppressLint
 import android.widget.Toast
@@ -71,7 +71,7 @@ fun FullImageScreen(
     imageClass: DomainUnsplashImage?,
     onBackClick: () -> Unit,
     onPhotographerNameClick: (String) -> Unit,
-    OnImageDownloadClick: (String, String?) -> Unit
+    onImageDownloadClick: (String, String?) -> Unit
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -80,11 +80,11 @@ fun FullImageScreen(
     var isDownloadBottomSheetOpen by remember { mutableStateOf(false) }
     var sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    val image = imageClass?.imageUrlRaw
+    val rawUrl = imageClass?.imageUrlRaw
     val imageUrl = imageClass?.imageUrlRegular
     val thumbnailUrl = imageClass?.imageUrlSmall
 
-    val imageRequest = ImageRequest.Builder(context).data(image).crossfade(false)
+    val imageRequest = ImageRequest.Builder(context).data(rawUrl).crossfade(false)
         .diskCachePolicy(CachePolicy.ENABLED).memoryCachePolicy(CachePolicy.ENABLED).build()
 
     val imageRequestThumb = ImageRequest.Builder(context).data(thumbnailUrl).crossfade(false)
@@ -131,7 +131,7 @@ fun FullImageScreen(
                 ImageDownloadOption.ORIGINAL -> imageClass?.imageUrlRaw
             }
             url.let {
-                OnImageDownloadClick(it.toString(), imageClass?.description?.take(10).toString())
+                onImageDownloadClick(it.toString(), imageClass?.description?.take(10).toString())
                 Toast.makeText(context, "Downloading...", Toast.LENGTH_SHORT).show()
             }
         }

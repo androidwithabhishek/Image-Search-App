@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity()
 
                     NetworkStatus.Connected ->
                     {
-                        message = "Connected To Internet 😊😊😊😊"
+                        message = "Back online"
                         bgColors = Color.Green
                         delay(2000)
                         showStatusBar = false
@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity()
                     {
 
                         showStatusBar = true
-                        message = "No Internet Connected 🤬"
+                        message = "No Internet Connected "
                         bgColors = Color.Red
 
                     }

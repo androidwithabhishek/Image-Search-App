@@ -1,4 +1,4 @@
-package com.example.imageapp.data.maper
+package com.example.imageapp.data.mapper
 
 import com.example.imageapp.data.local.entity.FavoriteImageEntity
 import com.example.imageapp.data.local.entity.UnsplashImageEntity

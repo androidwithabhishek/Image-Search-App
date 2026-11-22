@@ -25,8 +25,8 @@ import javax.inject.Inject
 {
 
 
-    private val _snackbarEvent = Channel<SnackBarEvent>()
-    val snackbarEvent = _snackbarEvent.receiveAsFlow()
+    private val _snackBarEvent = Channel<SnackBarEvent>()
+    val snackBarEvent = _snackBarEvent.receiveAsFlow()
 
     private val _searchImages = MutableStateFlow<PagingData<DomainUnsplashImage>>(PagingData.empty())
     val searchImages = _searchImages
@@ -42,7 +42,7 @@ import javax.inject.Inject
                     .collect { _searchImages.value = it }
             } catch (e: Exception)
             {
-                _snackbarEvent.send(SnackBarEvent(message = "Somthing went worong ${e.message}"))
+                _snackBarEvent.send(SnackBarEvent(message = "Something went wrong ${e.message}"))
             }
         }
 
@@ -51,7 +51,7 @@ import javax.inject.Inject
 
     val favoriteImageIds: StateFlow<List<String>> =
             repository.getFavoriteImagesId().catch { exception ->
-                _snackbarEvent.send(SnackBarEvent(message = "Something went wrong. ${exception.message}"))
+                _snackBarEvent.send(SnackBarEvent(message = "Something went wrong. ${exception.message}"))
             }.stateIn(scope = viewModelScope,
                       started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
                       initialValue = emptyList())
@@ -69,7 +69,7 @@ import javax.inject.Inject
 
             } catch (e: Exception)
             {
-                _snackbarEvent.send(SnackBarEvent(message = "Somthing went worong ${e.message}"))
+                _snackBarEvent.send(SnackBarEvent(message = "Something went wrong ${e.message}"))
             }
         }
     }

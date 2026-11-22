@@ -1,4 +1,4 @@
-package com.example.imageapp.presentation.fevScreen
+package com.example.imageapp.presentation.favScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,13 +26,13 @@ class FavViewModel @Inject constructor(
     ViewModel() {
 
 
-    private val _snackbarEvent = Channel<SnackBarEvent>()
-    val snackbarEvent = _snackbarEvent.receiveAsFlow()
+    private val _snackBarEvent = Channel<SnackBarEvent>()
+    val snackBarEvent = _snackBarEvent.receiveAsFlow()
 
 
     val favoriteImage: StateFlow<PagingData<DomainUnsplashImage>> =
         repository.getAllFavPagingImages().catch { exception ->
-            _snackbarEvent.send(SnackBarEvent(message = "Something went wrong. ${exception.message}"))
+            _snackBarEvent.send(SnackBarEvent(message = "something went wrong. ${exception.message}"))
         }.cachedIn(viewModelScope)
             .stateIn(
                 scope = viewModelScope,
@@ -43,7 +43,7 @@ class FavViewModel @Inject constructor(
 
     val favoriteImageIds: StateFlow<List<String>> =
         repository.getFavoriteImagesId().catch { exception ->
-            _snackbarEvent.send(SnackBarEvent(message = "Something went wrong. ${exception.message}"))
+            _snackBarEvent.send(SnackBarEvent(message = "something went wrong. ${exception.message}"))
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
@@ -59,7 +59,7 @@ class FavViewModel @Inject constructor(
 
 
             } catch (e: Exception) {
-                _snackbarEvent.send(SnackBarEvent(message = "Somthing went worong ${e.message}"))
+                _snackBarEvent.send(SnackBarEvent(message = "something ent wrong ${e.message}"))
             }
         }
     }

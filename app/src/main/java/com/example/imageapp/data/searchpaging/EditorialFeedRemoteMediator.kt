@@ -11,7 +11,7 @@ import androidx.room.withTransaction
 import com.example.imageapp.data.local.database.ImageVistaDatabase
 import com.example.imageapp.data.local.entity.UnsplashImageEntity
 import com.example.imageapp.data.local.entity.UnsplashRemoteKeys
-import com.example.imageapp.data.maper.toEntityList
+import com.example.imageapp.data.mapper.toEntityList
 import com.example.imageapp.data.remote.UnsplashApiService
 import com.example.imageapp.data.utils.Constants
 import com.example.imageapp.data.utils.Constants.ITEMS_PER_PAGE

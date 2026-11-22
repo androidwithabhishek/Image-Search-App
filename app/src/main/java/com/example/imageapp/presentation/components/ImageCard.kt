@@ -39,7 +39,7 @@ import com.google.accompanist.placeholder.shimmer
 @Composable fun ImageCard(modifier: Modifier = Modifier,
                           image: DomainUnsplashImage?,
                           onFevClick: () -> Unit,
-                          isFev: Boolean)
+                          isFav: Boolean)
 {
     val context = LocalContext.current
 
@@ -85,17 +85,21 @@ import com.google.accompanist.placeholder.shimmer
                     modifier = Modifier
                         .fillMaxSize()
                         .placeholder(
-                                visible = isLoading,
-                                highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White.copy(alpha = 0.6f)),
-                                color = Color.Gray.copy(alpha = 0.2f),
-                                shape = RoundedCornerShape(10.dp)
+                            visible = isLoading,
+                            highlight = PlaceholderHighlight.shimmer(
+                                highlightColor = Color.White.copy(
+                                    alpha = 0.6f
+                                )
+                            ),
+                            color = Color.Gray.copy(alpha = 0.2f),
+                            shape = RoundedCornerShape(10.dp)
                         ),
                     contentScale = ContentScale.FillBounds
             )
 
             FavButton(
-                    isFev = isFev,
-                    onFevClick = onFevClick,
+                    isFav = isFav,
+                    onFavClick = onFevClick,
                     modifier = Modifier.align(Alignment.BottomEnd)
             )
 
@@ -109,10 +113,10 @@ import com.google.accompanist.placeholder.shimmer
 @Composable
 fun FavButton(
     modifier: Modifier = Modifier,
-    isFev: Boolean,
-    onFevClick: () -> Unit
+    isFav: Boolean,
+    onFavClick: () -> Unit
 ) {
-    val transition = updateTransition(targetState = isFev, label = "favoriteTransition")
+    val transition = updateTransition(targetState = isFav, label = "favoriteTransition")
 
     val tint by transition.animateColor(label = "color") { isFavorite ->
         if (isFavorite) Color.Red else Color.Gray
@@ -123,10 +127,10 @@ fun FavButton(
 
     IconButton(
             modifier = modifier,
-            onClick = onFevClick
+            onClick = { onFavClick() }
     ) {
         Icon(
-                imageVector = if (isFev) Icons.Outlined.FavoriteBorder else Icons.Default.FavoriteBorder,
+                imageVector = if (isFav) Icons.Outlined.FavoriteBorder else Icons.Default.FavoriteBorder,
                 contentDescription = null,
                 tint = tint,
                 modifier = Modifier.size(size)

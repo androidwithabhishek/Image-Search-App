@@ -1,4 +1,4 @@
-package com.example.imageapp.presentation.components.blured
+package com.example.imageapp.presentation.components.blurred
 
 
 import androidx.compose.foundation.clickable
@@ -47,7 +47,7 @@ fun BlurredImageVerticalGrid(
         ) {
             items(count = images.itemCount) { index: Int ->
                 val image = images[index]
-                BluerImageCard(
+                BlurredImageCard(
                     image = image, modifier = Modifier
                         .clickable {
 
@@ -61,11 +61,12 @@ fun BlurredImageVerticalGrid(
                                 onDragCancel = { onImageDragEnd() },
                                 onDragEnd = { onImageDragEnd() },
                                 onDrag = { _, _ -> })
-                        }, onFevClick = {
+                        }, onFavClick = {
                         image?.let {
                             onFevClick(it)
                         }
-                    }, isFev = favoriteImageIDs.contains(image?.id)
+                    },
+                    isFav = favoriteImageIDs.contains(image?.id),
                 )
 
             }

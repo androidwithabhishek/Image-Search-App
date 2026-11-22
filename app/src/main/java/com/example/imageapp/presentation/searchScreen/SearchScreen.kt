@@ -41,7 +41,7 @@ import androidx.navigation.NavHostController
 import androidx.paging.compose.LazyPagingItems
 import com.example.imageapp.presentation.components.ImageVerticalGrid
 import com.example.imageapp.presentation.components.ZoomedImageCard
-import com.example.imageapp.presentation.components.blured.BlurredImageVerticalGrid
+import com.example.imageapp.presentation.components.blurred.BlurredImageVerticalGrid
 import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.utils.SnackBarEvent
 import kotlinx.coroutines.CoroutineScope
@@ -55,9 +55,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun SearchScreen(
 
-    snackbarHostState: SnackbarHostState,
+    snackBarHostState: SnackbarHostState,
+
     navHostController: NavHostController,
-    snackbarEvent: Flow<SnackBarEvent>,
+    snackBarEvent: Flow<SnackBarEvent>,
     scrollBehavior: TopAppBarScrollBehavior,
     images: LazyPagingItems<DomainUnsplashImage>,
     favoriteImageIDs: List<String>,
@@ -69,7 +70,7 @@ fun SearchScreen(
     ) {
 
     val focusRequester = remember { FocusRequester() }
-    val foucusManager = LocalFocusManager.current
+    val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
 //For image card
@@ -79,10 +80,11 @@ fun SearchScreen(
 
 //
 
-    var isSugsetionVisible by remember { mutableStateOf(false) }
+    var isSuggestionVisible by remember { mutableStateOf(false) }
+
     LaunchedEffect(key1 = true) {
-        snackbarEvent.collect { event ->
-            snackbarHostState.showSnackbar(message = event.message, duration = event.duration)
+        snackBarEvent.collect { event ->
+            snackBarHostState.showSnackbar(message = event.message, duration = event.duration)
         }
     }
 
@@ -121,14 +123,14 @@ fun SearchScreen(
                     .padding(start = 8.dp, end = 8.dp)
                     .focusRequester(focusRequester)
                     .onFocusChanged {
-                        isSugsetionVisible = it.isFocused
+                        isSuggestionVisible = it.isFocused
                     },
                 query = query,
                 onQueryChange = { query = it },
                 onSearch = {
                     onSearch(query)
                     keyboardController?.hide()
-                    foucusManager.clearFocus()
+                    focusManager.clearFocus()
 
                 },
                 active = false,
@@ -144,9 +146,9 @@ fun SearchScreen(
                     IconButton(onClick = {
                         if (query.isNotEmpty()) {
                             query = ""
-                            foucusManager.clearFocus()
+                            focusManager.clearFocus()
                         } else {
-                            foucusManager.clearFocus()
+                            focusManager.clearFocus()
                             CoroutineScope(Dispatchers.Main).launch {
                                 delay(1000)
                                 onBackClick()
@@ -162,7 +164,7 @@ fun SearchScreen(
                 }) {}
 
 
-            AnimatedVisibility(visible = isSugsetionVisible) {
+            AnimatedVisibility(visible = isSuggestionVisible) {
                 LazyRow(
                     contentPadding = PaddingValues(horizontal = 10.dp),
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -172,7 +174,7 @@ fun SearchScreen(
                             onClick = {
                                 query = item
                                 keyboardController?.hide()
-                                foucusManager.clearFocus()
+                                focusManager.clearFocus()
                                 onSearch(query)
                             },
                             label = { Text(text = item) },
@@ -198,8 +200,8 @@ fun SearchScreen(
                 },
                 onImageDragEnd = { showImagePreview = false },
 
-                onFevClick = { toggleFavoriteStatus(it) },
-                isFev = false,
+                onFavClick = { toggleFavoriteStatus(it) },
+                isFav = false,
 
 
                 )

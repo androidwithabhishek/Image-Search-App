@@ -2,7 +2,7 @@ package com.example.imageapp.data.searchpaging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.imageapp.data.maper.toDomainModelList
+import com.example.imageapp.data.mapper.toDomainModelList
 import com.example.imageapp.data.remote.UnsplashApiService
 import com.example.imageapp.domain.model.DomainUnsplashImage
 

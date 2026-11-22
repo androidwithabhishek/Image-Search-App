@@ -1,4 +1,4 @@
-package com.example.imageapp.presentation.FulllImageScreen
+package com.example.imageapp.presentation.fullImageScreen
 
 
 import androidx.compose.runtime.getValue
@@ -24,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FullScreenViewModel @Inject constructor(
     private val repository: ImageRepository,
-    private val downLoadRepo: ImageDownloader,
+    private val imageDownloader: ImageDownloader,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -57,12 +57,11 @@ class FullScreenViewModel @Inject constructor(
     fun downloadImage(url: String, title: String) {
         viewModelScope.launch {
             try {
-                downLoadRepo.downloadFile(url = url, fileName = title)
+                imageDownloader.downloadFile(url = url, fileName = title)
             } catch (e: Exception) {
                 _snackBarEvent.send(
                     SnackBarEvent(
-                        message = "Chud Gye Guru ${e.message}",
-
+                        message = "Download failed: ${e.message}",
                         )
                 )
 

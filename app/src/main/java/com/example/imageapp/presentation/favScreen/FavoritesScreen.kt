@@ -1,4 +1,4 @@
-package com.example.imageapp.presentation.fevScreen
+package com.example.imageapp.presentation.favScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,7 +31,7 @@ import androidx.paging.compose.LazyPagingItems
 import com.example.imageapp.presentation.components.HomeTopAppBar
 import com.example.imageapp.presentation.components.ImageVerticalGrid
 import com.example.imageapp.presentation.components.ZoomedImageCard
-import com.example.imageapp.presentation.components.blured.BlurredImageVerticalGrid
+import com.example.imageapp.presentation.components.blurred.BlurredImageVerticalGrid
 import com.example.imageapp.R
 import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.utils.SnackBarEvent
@@ -42,9 +42,9 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun FavoritesScreen(
     modifier: Modifier = Modifier,
-    snackbarHostState: SnackbarHostState,
+    snackBarHostState: SnackbarHostState,
     navHostController: NavHostController,
-    snackbarEvent: Flow<SnackBarEvent>,
+    snackBarEvent: Flow<SnackBarEvent>,
     scrollBehavior: TopAppBarScrollBehavior,
     images: LazyPagingItems<DomainUnsplashImage>,
     favoriteImageIDs: List<String>,
@@ -61,8 +61,8 @@ fun FavoritesScreen(
 
 
     LaunchedEffect(key1 = true) {
-        snackbarEvent.collect { event ->
-            snackbarHostState.showSnackbar(message = event.message, duration = event.duration)
+        snackBarEvent.collect { event ->
+            snackBarHostState.showSnackbar(message = event.message, duration = event.duration)
         }
     }
     Box(modifier = Modifier.fillMaxSize()) {
@@ -112,8 +112,8 @@ fun FavoritesScreen(
                 },
                 onImageDragEnd = { showImagePreview = false },
 
-                onFevClick = { toggleFavoriteStatus(it) },
-                isFev = false,
+                onFavClick = { toggleFavoriteStatus(it) },
+                isFav = false,
 
 
                 )

@@ -1,4 +1,4 @@
-package com.example.imageapp.presentation.components.blured
+package com.example.imageapp.presentation.components.blurred
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -30,10 +30,10 @@ import com.google.accompanist.placeholder.shimmer
 
 
 @Composable
-fun  BluerImageCard (modifier: Modifier = Modifier,
+fun  BlurredImageCard (modifier: Modifier = Modifier,
                      image: DomainUnsplashImage?,
-                     onFevClick: () -> Unit,
-                     isFev: Boolean) {
+                     onFavClick: () -> Unit,
+                     isFav: Boolean) {
     val context = LocalContext.current
 
 
@@ -91,9 +91,9 @@ fun  BluerImageCard (modifier: Modifier = Modifier,
             )
 
             FavButton(
-                isFev = isFev,
-                onFevClick = onFevClick,
-                modifier = Modifier.align(Alignment.BottomEnd)
+                onFavClick = onFavClick,
+                modifier = Modifier.align(Alignment.BottomEnd),
+                isFav = isFav
             )
 
         }

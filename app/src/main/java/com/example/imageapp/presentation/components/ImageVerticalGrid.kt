@@ -24,13 +24,10 @@ fun ImageVerticalGrid(
     onImageClick: (imageId: String, index: Int) -> Unit,
     onImageDragStart: (DomainUnsplashImage?) -> Unit,
     onImageDragEnd: () -> Unit,
-    onFevClick: (DomainUnsplashImage) -> Unit,
-    isFev: Boolean = true,
+    onFavClick: (DomainUnsplashImage) -> Unit,
+    isFav: Boolean = true,
     favoriteImageIDs: List<String>,
-
-
-    ) {
-
+) {
     val scrollState = rememberLazyStaggeredGridState()
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -59,10 +56,11 @@ fun ImageVerticalGrid(
                                 onDragEnd = { onImageDragEnd() },
                                 onDrag = { _, _ -> })
                         }, onFevClick = {
-                    image?.let {
-                        onFevClick(it)
-                    }
-                }, isFev = favoriteImageIDs.contains(image?.id)
+                        image?.let {
+                            onFavClick(it)
+
+                        }
+                    }, isFav = favoriteImageIDs.contains(image?.id)
                 )
 
             }

@@ -1,4 +1,4 @@
-package com.example.imageapp.presentation.HomeScreen
+package com.example.imageapp.presentation.homScreen
 
 
 import androidx.compose.foundation.layout.Box
@@ -27,7 +27,7 @@ import androidx.paging.compose.LazyPagingItems
 import com.example.imageapp.presentation.components.HomeTopAppBar
 import com.example.imageapp.presentation.components.ImageVerticalGrid
 import com.example.imageapp.presentation.components.ZoomedImageCard
-import com.example.imageapp.presentation.components.blured.BlurredImageVerticalGrid
+import com.example.imageapp.presentation.components.blurred.BlurredImageVerticalGrid
 import com.example.imageapp.R
 import com.example.imageapp.domain.model.DomainUnsplashImage
 import com.example.imageapp.utils.SnackBarEvent
@@ -37,8 +37,8 @@ import kotlinx.coroutines.flow.Flow
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    snackbarHostState: SnackbarHostState,
-    snackbarEvent: Flow<SnackBarEvent>,
+    snackBarHostState: SnackbarHostState,
+    snackBarEvent: Flow<SnackBarEvent>,
     scrollBehavior: TopAppBarScrollBehavior,
     images: LazyPagingItems<DomainUnsplashImage>,
     favoriteImageIDs: List<String>,
@@ -46,8 +46,6 @@ fun HomeScreen(
     toggleFavoriteStatus: (DomainUnsplashImage) -> Unit,
     onSearchClick: () -> Unit,
     onFABClick: () -> Unit,
-
-
     ) {
 
     var showImagePreview by remember { mutableStateOf(false) }
@@ -55,8 +53,8 @@ fun HomeScreen(
 
 
     LaunchedEffect(key1 = true) {
-        snackbarEvent.collect { event ->
-            snackbarHostState.showSnackbar(message = event.message, duration = event.duration)
+        snackBarEvent.collect { event ->
+            snackBarHostState.showSnackbar(message = event.message, duration = event.duration)
         }
     }
 
@@ -105,18 +103,16 @@ fun HomeScreen(
                     showImagePreview = true
                 },
                 onImageDragEnd = { showImagePreview = false },
-
-                onFevClick = { toggleFavoriteStatus(it) },
-                isFev = false,
-
-
-                )
+                isFav = false,
+                onFavClick =  { toggleFavoriteStatus(it) },
+            )
 
 
         }
         FloatingActionButton(
             modifier = Modifier
-                .align(Alignment.BottomEnd).padding(end = 20.dp, bottom = 20.dp)
+                .align(Alignment.BottomEnd)
+                .padding(end = 20.dp, bottom = 20.dp)
                 .padding(24.dp),
             onClick = { onFABClick() },
             containerColor = Color.White.copy(alpha = 0.55f),
