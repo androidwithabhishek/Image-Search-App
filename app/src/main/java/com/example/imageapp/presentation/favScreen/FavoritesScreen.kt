@@ -66,17 +66,6 @@ fun FavoritesScreen(
         }
     }
     Box(modifier = Modifier.fillMaxSize()) {
-
-
-
-
-
-
-
-
-
-
-
         BlurredImageVerticalGrid(
             images = images,
             onImageClick = onImageClick,

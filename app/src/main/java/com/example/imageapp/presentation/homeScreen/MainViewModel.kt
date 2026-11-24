@@ -11,6 +11,7 @@ import com.example.imageapp.domain.repository.NetworkConnectivityObserver
 import com.example.imageapp.utils.SnackBarEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -23,53 +24,18 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: ImageRepository,
-    private var connectivityObserver: NetworkConnectivityObserver,
-) :
+    private val  connectivityObserver: NetworkConnectivityObserver
+    ) :
     ViewModel() {
 
 
-    private var isFeedLoaded = false
     private val _snackBarEvent = Channel<SnackBarEvent>()
     val snackBarEvent = _snackBarEvent.receiveAsFlow()
 
-    private val _images = MutableStateFlow(PagingData.empty<DomainUnsplashImage>())
-    var images: StateFlow<PagingData<DomainUnsplashImage>> = _images
 
-    init {
-        observeConnectivity()
-    }
+    val images: Flow<PagingData<DomainUnsplashImage>> =
+        repository.getEditorialFeedImage().cachedIn(viewModelScope)
 
-    private fun observeConnectivity() {
-        viewModelScope.launch {
-            connectivityObserver.networkStatus.collect {
-                status ->
-                when (status) {
-                    NetworkStatus.Connected -> {
-
-                        if (!isFeedLoaded) {
-                            getImages()
-                        }
-                    }
-
-                    NetworkStatus.Disconnected -> {
-
-                    }
-                }
-            }
-        }
-    }
-
-
-    fun getImages() {
-        viewModelScope.launch {
-            repository.getEditorialFeedImage().cachedIn(viewModelScope).catch { exception ->
-                _snackBarEvent.send(SnackBarEvent("Something went wrong: ${exception.message}"))
-            }.collect { pagingData ->
-                _images.value = pagingData
-                isFeedLoaded = true
-            }
-        }
-    }
 
     val favoriteImageIds: StateFlow<List<String>> =
         repository.getFavoriteImagesId().catch { exception ->

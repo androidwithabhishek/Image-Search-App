@@ -1,5 +1,6 @@
 package com.example.imageapp.presentation.components
 
+import android.view.RoundedCorner
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Arrangement
@@ -9,12 +10,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
 import com.example.imageapp.domain.model.DomainUnsplashImage
+import kotlin.math.round
 
 
 @Composable
@@ -30,7 +35,8 @@ fun ImageVerticalGrid(
 ) {
     val scrollState = rememberLazyStaggeredGridState()
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier.fillMaxSize()) {
         LazyVerticalStaggeredGrid(
             modifier = Modifier,
             state = scrollState,

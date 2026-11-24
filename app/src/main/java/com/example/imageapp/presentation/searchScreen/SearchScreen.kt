@@ -101,8 +101,8 @@ fun SearchScreen(
             },
             onImageDragEnd = { showImagePreview = false },
 
-            onFevClick = { toggleFavoriteStatus(it) },
-            isFev = false,
+            onFavClick = { toggleFavoriteStatus(it) },
+            isFav = false,
         )
 
         Column(

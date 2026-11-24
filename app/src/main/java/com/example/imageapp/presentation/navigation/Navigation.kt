@@ -59,17 +59,14 @@ fun Navigation(
                 onImageClick = { imageId, index ->
                     navController.navigate(Routes.FullScreen(imageId = imageId, index = index))
                 },
-
                 onSearchClick = { navController.navigate(Routes.SearchScreen) },
                 onFABClick = { navController.navigate(Routes.FavScreen) },
-
                 favoriteImageIDs = favoriteImageIdsHome,
                 toggleFavoriteStatus = {
                     viewModel.toggleFavoriteStatus(it)
-
                 },
 
-            )
+                )
 
 
         }
@@ -79,20 +76,16 @@ fun Navigation(
             val viewModelSearch: SearchViewModel = hiltViewModel()
             val searchFeed = viewModelSearch.searchImages.collectAsLazyPagingItems()
             val favoriteImageIds by viewModelSearch.favoriteImageIds.collectAsStateWithLifecycle()
-
-
-
-
             SearchScreen(
                 snackBarHostState = snackBarState,
                 navHostController = navController,
                 snackBarEvent = viewModelSearch.snackBarEvent,
                 scrollBehavior = topAppBarScrollBehavior,
                 images = searchFeed,
-                onImageClick = { Imageid, index ->
+                onImageClick = { imageId, index ->
                     navController.navigate(
                         Routes.FullScreen(
-                            imageId = Imageid,
+                            imageId = imageId,
                             index = index
                         )
                     )
@@ -101,12 +94,10 @@ fun Navigation(
                     viewModelSearch.searchImages(it)
                 },
                 toggleFavoriteStatus = {
-
                     viewModelSearch.toggleFavoriteStatus(it)
-
                 },
                 favoriteImageIDs = favoriteImageIds,
-                onBackClick = {navController.popBackStack()}
+                onBackClick = { navController.popBackStack() }
             )
 
 
