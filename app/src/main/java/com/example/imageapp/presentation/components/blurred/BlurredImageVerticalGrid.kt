@@ -26,9 +26,10 @@ fun BlurredImageVerticalGrid(
     onImageClick: (imageId: String, index: Int) -> Unit,
     onImageDragStart: (DomainUnsplashImage?) -> Unit,
     onImageDragEnd: () -> Unit,
-    onFevClick: (DomainUnsplashImage) -> Unit,
-    isFev: Boolean = true,
+    onFavClick: (DomainUnsplashImage) -> Unit,
+    isFav: Boolean = true,
     favoriteImageIDs: List<String>,
+
 
 
     ) {
@@ -63,7 +64,7 @@ fun BlurredImageVerticalGrid(
                                 onDrag = { _, _ -> })
                         }, onFavClick = {
                         image?.let {
-                            onFevClick(it)
+                            onFavClick(it)
                         }
                     },
                     isFav = favoriteImageIDs.contains(image?.id),

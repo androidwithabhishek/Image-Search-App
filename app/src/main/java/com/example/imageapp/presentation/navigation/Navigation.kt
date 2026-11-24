@@ -18,8 +18,6 @@ import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.imageapp.presentation.fullImageScreen.FullScreenViewModel
 
-
-
 import com.example.imageapp.presentation.favScreen.FavViewModel
 import com.example.imageapp.presentation.favScreen.FavoritesScreen
 
@@ -30,8 +28,8 @@ import com.example.imageapp.presentation.searchScreen.SearchViewModel
 
 
 import com.example.imageapp.presentation.fullImageScreen.FullImageScreen
-import com.example.imageapp.presentation.homScreen.HomeScreen
-import com.example.imageapp.presentation.homScreen.MainViewModel
+import com.example.imageapp.presentation.homeScreen.HomeScreen
+import com.example.imageapp.presentation.homeScreen.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

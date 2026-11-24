@@ -32,7 +32,7 @@ class FavViewModel @Inject constructor(
 
     val favoriteImage: StateFlow<PagingData<DomainUnsplashImage>> =
         repository.getAllFavPagingImages().catch { exception ->
-            _snackBarEvent.send(SnackBarEvent(message = "something went wrong. ${exception.message}"))
+            _snackBarEvent.send(SnackBarEvent(message = "Something went wrong. ${exception.message}"))
         }.cachedIn(viewModelScope)
             .stateIn(
                 scope = viewModelScope,
@@ -49,6 +49,11 @@ class FavViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
             initialValue = emptyList()
         )
+
+
+
+
+
 
     fun toggleFavoriteStatus(image: DomainUnsplashImage) {
 
