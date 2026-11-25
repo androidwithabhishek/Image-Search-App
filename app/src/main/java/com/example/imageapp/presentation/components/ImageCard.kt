@@ -3,6 +3,8 @@ package com.example.imageapp.presentation.components
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +24,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -32,6 +36,7 @@ import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.example.imageapp.domain.model.DomainUnsplashImage
+import com.example.imageapp.presentation.components.blurred.BlurredImageCard
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.shimmer
@@ -57,7 +62,7 @@ import com.google.accompanist.placeholder.shimmer
 
     val imageRequest = remember(image) {
         ImageRequest.Builder(context)
-            .data(image?.imageUrlRegular)
+            .data(image?.imageUrlSmall)
             .crossfade(true)
             .build()
     }
@@ -74,7 +79,6 @@ import com.google.accompanist.placeholder.shimmer
         Box{
 
             var isLoading by remember { mutableStateOf(true) }
-
 
             AsyncImage(
                     model = imageRequest,

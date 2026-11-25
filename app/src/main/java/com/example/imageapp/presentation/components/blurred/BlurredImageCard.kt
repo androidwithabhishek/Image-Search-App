@@ -80,13 +80,7 @@ fun  BlurredImageCard (modifier: Modifier = Modifier,
                     isLoading = it is AsyncImagePainter.State.Loading
                 },
                 modifier = Modifier
-                    .fillMaxSize()
-                    .placeholder(
-                        visible = isLoading,
-                        highlight = PlaceholderHighlight.shimmer(highlightColor = Color.White.copy(alpha = 0.6f)),
-                        color = Color.Gray.copy(alpha = 0.2f),
-                        shape = RoundedCornerShape(10.dp)
-                    ),
+                    .fillMaxSize(),
                 contentScale = ContentScale.FillBounds
             )
 
